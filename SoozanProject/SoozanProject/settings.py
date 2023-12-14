@@ -40,7 +40,9 @@ INSTALLED_APPS = [
 
     'User',
     'Artist',
-    
+    'Applicant',
+    'Post',
+    'Request'
 ]
 
 MIDDLEWARE = [

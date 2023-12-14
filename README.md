@@ -4,7 +4,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Soozan</h3>
+<h1 align="center">Soozan</h1>
 
   <p align="center">
     Developing ...
@@ -15,7 +15,9 @@
 </div>
 
 <br />
-## If you wanna help read here !
-## اگه میخوایی توی این پروژه کمکم کنی اینجا رو بخون
+
+<h2>If you wanna help read here !</h2>
+<br />
+<h2>اگه میخوایی توی این پروژه کمکم کنی اینجا رو بخون</h2>
 
 

@@ -21,4 +21,4 @@ post - only artist can share post
 request -  applicants send request to artist
 
 
-
+![alt text](https://github.com/mohsenfn/soozan/db_diagram.png)

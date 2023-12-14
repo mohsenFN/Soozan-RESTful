@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    Whole idea is to create a website for connecting tattoo artists to users
+
+</head>
+
+<body>
+    <h1>Website Views</h1>
+    
+    Table Artist :
+        id
+        username --> 32 char
+        password --> 64 char
+        art_name --> 32 char
+        fullname --> 32 char
+        location ?
+        posts --> List of Post.id
+        requests --> List of Request.id
+        szn_rank ?
+        signup_date
+    -----
+    Table User :
+        id
+        username --> 32 char
+        password --> 64 char
+        fullname --> 32 char
+        location ?
+        requests --> List of Request.id
+        signup_date
+    -----
+    Table Post :
+        id
+        artist --> Artist.id
+        src --> image address (will be saved localy)
+        caption > 512 char
+        pub_date
+    -----
+    Table Request :
+        id
+        user > User.id
+        artist > Artist.id
+        source --> image address (will be saved localy)
+        caption --> 512 char
+        pub_date
+    
+
+
+    Apps 
+
+        / : Index Page
+        /Search : Search Tattoo Artist
+        /about : About Soozan
+        /report : get comments and reports about Soozan
+
+    -----    
+        /Artist/Login
+        /Artist/SingUp
+        /Artist/<Artist.id> : Each Artist Profile
+        /Artist/DashBoard
+        /Artist/NewPost
+        /Artist/AllRequests : List all request
+        /Artist/Request/<Request.id> : Each Artist Requests
+    -----
+        /User/Login
+        /User/SignUp
+        /User/DashBoard
+        /User/NewRequest
+        /User/Settings/ChangeFullName
+        /User/Settings/ChangeLocation
+        /User/Settings/ChangePassWord
+
+    -----
+        /Post/<id>
+    -----
+
+
+        
+
+
+    
+
+    
+
+
+
+
+</body>
+
+</html>

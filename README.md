@@ -11,9 +11,13 @@ beheshoon negah bendaz (ta alan test nakardm btw mohem ine logicam dorost bashe 
 
 
 user - model asli hame user ha
+<br />
 artist - user type 1
+<br />
 applicant - user type 2
+<br />
 post - only artist can share post
+<br />
 request -  applicants send request to artist
 
 

@@ -1,3 +1,8 @@
 from django.contrib import admin
+from Request.models import Request
 
-# Register your models here.
+class AuthorAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Request, AuthorAdmin)

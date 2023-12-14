@@ -13,5 +13,8 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
     
+    USERNAME_FIELD = 'number'
+    REQUIRED_FIELDS = ['number', 'user_type', 'date_joined']
+
     def __str__(self):
         return self.number

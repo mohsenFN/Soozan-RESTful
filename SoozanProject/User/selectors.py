@@ -2,6 +2,10 @@ from User.models import User
 
 class UserSelector:
 
+
+    def user_instance(user_id):
+        return User.objects.get(id = user_id)
+
     def user_is_artist(number):
         if not User.objects.filter(number=number).exists():
             raise User.DoesNotExist

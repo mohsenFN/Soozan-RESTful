@@ -1,5 +1,5 @@
 from Artist.models import DerivedArtist
-from Utils.selectors import Selector
+from User.selectors import UserSelector
 
 
 class NewArtist:
@@ -14,7 +14,7 @@ class NewArtist:
 
     def save(self):
         # Data Should be validated in API views (for this case Artist.viewes)
-        new_artist = DerivedArtist(user = Selector.user_instance(self.user_id), full_name = self.full_name,
+        new_artist = DerivedArtist(user = UserSelector.user_instance(self.user_id), full_name = self.full_name,
                                     art_name = self.art_name, location = self.location)
 
         new_artist.save()

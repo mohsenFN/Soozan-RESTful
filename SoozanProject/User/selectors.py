@@ -10,7 +10,7 @@ class UserSelector:
         if not User.objects.filter(number=number).exists():
             raise User.DoesNotExist
 
-        if User.objects.filter(number=number)[0].user_type == 'ARTIST':
+        if User.objects.get(number=number).user_type == 'ARTIST':
             return True
 
         return False
@@ -20,7 +20,7 @@ class UserSelector:
         if not User.objects.filter(number=number).exists():
             raise User.DoesNotExist
 
-        if User.objects.filter(number=number)[0].user_type == 'USER':
+        if User.objects.get(number=number).user_type == 'USER':
             return True
             
         return False

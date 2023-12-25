@@ -6,6 +6,7 @@ from User.models import User
 
 class UserAdminClass(UserAdmin):
 
+    list_display = ['id', "number", "is_artist", "date_joined"]
     
     search_fields = ["number", "id"]
     ordering = ["id"]

@@ -1,21 +1,26 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.db.utils import  IntegrityError
+
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-from User.serializers import UserSerializer
-from Artist.serializers import ArtistSerializer, ArtistDashBoardSerializer
-from Applicant.serializers import ApplicantDashBoardSerializer
-from User.models import User
-from Applicant.models import Applicant
-from Artist.models import Artist
-
-
-from django.contrib.auth import authenticate, login, logout
-
-from django.contrib.auth.decorators import login_required
-
-from django.db.utils import  IntegrityError
-
 from rest_framework.parsers import JSONParser
+
+
+from User.models import User
+from User.serializers import UserSerializer
+
+from Artist.models import Artist
+from Artist.serializers import ArtistSerializer, ArtistDashBoardSerializer
+
+from Applicant.models import Applicant
+from Applicant.serializers import ApplicantDashBoardSerializer
+
+
+
+
+
 
 @api_view(['GET'])
 def SingleUserView(request: Request, user_id : int):

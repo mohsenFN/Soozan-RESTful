@@ -2,13 +2,18 @@ from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
 from User.serializers import UserSerializer
-from Artist.serializers import ArtistSerializer
+from Artist.serializers import ArtistSerializer, ArtistDashBoardSerializer
+from Applicant.serializers import ApplicantDashBoardSerializer
 from User.models import User
 from Applicant.models import Applicant
 from Artist.models import Artist
-from django.db.utils import  IntegrityError
 
-from User.validators import UserValidator
+
+from django.contrib.auth import authenticate, login, logout
+
+from django.contrib.auth.decorators import login_required
+
+from django.db.utils import  IntegrityError
 
 from rest_framework.parsers import JSONParser
 
@@ -51,18 +56,54 @@ def Register(request : Request):
 
 	profile.save()
 	
+	# return more logical responses
 	return Response(f'{user.id}, {user.number}')
 
 
 @api_view(['GET'])
-def Signin(request : Request):
+def Login(request : Request):
 	number = request.data['number']
 	password = request.data['password']
+	
+	user = authenticate(request,username = number,
+						password = password)
+	
+	if user:
+		login(request, user)
+		print(request.user.is_authenticated)
+		
+		return Response('Welcome')
 
-	return Response('LOGIN view')
+	else:
+		print(request.user.is_authenticated)
+		return Response('Invalid info')
+
+
+@api_view(['GET'])
+def Logout(request : Request):
+
+	logout(request)
+	return Response('Logged out.')
 
 
 
+@login_required()
+@api_view(['GET'])
+def dashboard(request : Request):
+	print(type(request.user), request.user)
 
+	serializer = None
+	queryset = None
 
+	user = User.objects.get(number = request.user)
+
+	if request.user.is_artist:
+		queryset = Artist.objects.get(user = user)
+		serializer = ArtistDashBoardSerializer(queryset)
+		return Response(serializer.data)
+
+	else:
+		queryset = Applicant.objects.get(user = user)
+		serializer = ApplicantDashBoardSerializer(queryset)
+		return Response(serializer.data)
 

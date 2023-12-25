@@ -19,3 +19,12 @@ class ArtistSerializer(serializers.HyperlinkedModelSerializer):
                            )
 
         return artist
+
+
+
+
+class ArtistDashBoardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = ['user', 'full_name', 'art_name', 'location', 'soozan_score']
+

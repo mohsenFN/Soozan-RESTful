@@ -3,10 +3,10 @@
 
 # Views 
 
-`/user/register 	       number - password - is_artist`
+/user/register 	       number - password - is_artist
 <hr>
-`/user/login            number - password`
+/user/login            number - password
 <hr>
-`/user/logout	       -`
+/user/logout	       -
 <hr>
-`/user/dash             - (AKA Dashboard)`
+/user/dash             - (AKA Dashboard)

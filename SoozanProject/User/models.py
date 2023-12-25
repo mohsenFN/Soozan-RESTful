@@ -1,20 +1,25 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
-from .Manager import UserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from .manager import UserManager
+from django.core.validators import MinLengthValidator
 
 
-
-class User(AbstractBaseUser):
-    USER_TYPES =(('USER', 'User'), ('ARTIST', 'Artist'))
+class User(AbstractBaseUser, PermissionsMixin):
 
     number = models.CharField(max_length = 11, unique = True)
-    user_type = models.CharField(max_length = 6, choices = USER_TYPES, default = 'USER')
-    date_joined = models.DateTimeField()
+    password = models.CharField(max_length=88) # validate password length in views
+    is_artist = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    # try removing some of useless fields
 
     objects = UserManager()
     
     USERNAME_FIELD = 'number'
-    REQUIRED_FIELDS = ['password', 'number', 'user_type', 'date_joined']
+    REQUIRED_FIELDS = ['password']
 
     def __str__(self):
         return self.number

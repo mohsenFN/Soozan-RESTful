@@ -1,7 +1,12 @@
 
 
-addr ----------------- params
-/user/register 	       number - password - is_artist
-/user/login            number - password
-/user/logout	       -
-/user/dash             - (AKA Dashboard)
+
+# Views 
+
+`/user/register 	       number - password - is_artist`
+<hr>
+`/user/login            number - password`
+<hr>
+`/user/logout	       -`
+<hr>
+`/user/dash             - (AKA Dashboard)`

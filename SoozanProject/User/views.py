@@ -85,7 +85,7 @@ def Logout(request : Request):
 
 @login_required()
 @api_view(['GET'])
-def dashboard(request : Request):
+def DashBoard(request : Request):
 
 	user = User.objects.get(number = request.user)
 
@@ -99,3 +99,13 @@ def dashboard(request : Request):
 		queryset = Applicant.objects.filter(user = user)
 		serializer = ApplicantDashBoardSerializer(queryset)
 		return Response(serializer.data)
+
+
+@login_required
+@api_view(['DELETE'])
+def Delete(request : Request):
+
+	User.objects.get(number = request.user).delete()
+	return Response('User Deleted')
+
+	

@@ -1,6 +1,9 @@
 from django.db import models
 from User.models import User
 
+
+
+# TODO: Add images field
 class Request(models.Model):
     STATUS_TYPES = (('PENDING', 'Pending'), ('DECLINED', 'Declined'), ('ACCEPTED', 'Accepted'))
         
@@ -8,4 +11,4 @@ class Request(models.Model):
     artist = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'touser') 
     caption = models.CharField(max_length = 512)
     status = models.CharField(max_length = 8, choices = STATUS_TYPES, default = 'PENDING')
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(auto_now_add=True)

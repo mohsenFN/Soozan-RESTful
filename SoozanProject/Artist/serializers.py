@@ -15,7 +15,6 @@ class ArtistSerializer(serializers.HyperlinkedModelSerializer):
                            art_name = validated_data['art_name'],
                            validity = validated_data['validity'],
                            location = validated_data['location'],
-                           soozan_score = validated_data['soozan_score'],
                            )
 
         return artist
@@ -28,3 +27,12 @@ class ArtistDashBoardSerializer(serializers.ModelSerializer):
         model = Artist
         fields = ['user', 'full_name', 'art_name', 'location', 'soozan_score']
 
+
+class ArtistPatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = ['fullname', 'art_name', 'location']
+
+    def __init__(self, *args, **kwargs):
+        kwargs['partial'] = True
+        super(ArtistPatchSerializer, self).__init__(*args, **kwargs)

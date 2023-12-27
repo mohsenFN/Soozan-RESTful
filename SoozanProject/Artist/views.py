@@ -10,7 +10,13 @@ from Artist.models import Artist
 
 from User.models import User
 
+from Request.models import Request
+from Request.serializers import ArtistRequestsSerializer
 
+
+'''
+this modules has some major problems
+'''
 @login_required
 @api_view(['PATCH'])
 def UpdateArtist(request : Request):
@@ -24,3 +30,22 @@ def UpdateArtist(request : Request):
         return Response('Invalid')
 
     return Response('hey')
+
+
+@login_required
+@api_view(['GET'])
+def GetRequests(request : Request):
+    if 
+    
+    if not request.user.is_artist:
+        return Response('inke artist nist xarkosee')
+    
+
+    queryset = Request.objects.filter(pk = request.user.id)
+
+    serializer = ArtistRequestsSerializer(queryset)
+    
+    return Response(serializer)
+
+
+

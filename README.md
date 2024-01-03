@@ -1,12 +1,13 @@
+Ishalla baadan ye readme sexy minevisim 
 
 
+Number 1 is awake !
+11228
 
-# Views 
-
-/user/register 	       number - password - is_artist
-<hr>
-/user/login            number - password
-<hr>
-/user/logout	       -
-<hr>
-/user/dash             - (AKA Dashboard)
+   -
+  -
+ - -
+- -
+ - -
+  -
+   -

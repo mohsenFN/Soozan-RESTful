@@ -3,3 +3,4 @@
 *.sqlite3
 /venv
 *.swp
+*/.vscode

@@ -60,7 +60,7 @@ def Register(request : Request):
 	return Response(f'{user.id}, {user.number}')
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def Login(request : Request):
 	number = request.data['number']
 	password = request.data['password']

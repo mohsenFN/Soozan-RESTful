@@ -20,3 +20,9 @@ class ArtistRequestsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
         fields = ['user', 'caption', 'status', 'pub_date']
+
+
+class ApplicantRequestsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Request
+        fields = ['artist', 'caption', 'status', 'pub_date']

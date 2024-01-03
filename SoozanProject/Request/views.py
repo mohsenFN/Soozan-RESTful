@@ -8,13 +8,13 @@ from rest_framework.decorators import api_view
 from User.models import User
 from .serializers import *
 
+from Request.models import Request
 
 
 '''
 how to send req
 artist --> artist pk
 caption --> kossher
-
 '''
 @login_required
 @api_view(['POST'])
@@ -39,4 +39,19 @@ def NewRequest(request : Request):
     return Response('request saved')
 
 
+
+@login_required
+@api_view(['GET'])
+def ListRequests(request : Request):
+    if request.user.is_artist:
+        queryset = Request.objects.filter(artist = request.user)
+        serializer = ArtistRequestsSerializer(queryset, many = True)
+        return Response(serializer.data)
     
+    else:
+        queryset = Request.objects.filter(user = request.user)
+        serializer = ApplicantRequestsSerializer(queryset, many = True)
+        return Response(serializer.data)
+
+
+

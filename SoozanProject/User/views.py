@@ -2,10 +2,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.utils import  IntegrityError
 
-from rest_framework.decorators import api_view
+
+# TODO : don't forget to use permission classes instead of login_required
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 from User.models import User
@@ -17,6 +20,10 @@ from Artist.serializers import ArtistSerializer, ArtistDashBoardSerializer
 from Applicant.models import Applicant
 from Applicant.serializers import ApplicantDashBoardSerializer
 
+
+
+# TODO: remove non-standard responses and use clean responses
+# E.G: use HTTP response codes
 
 @api_view(['GET'])
 def SingleUserView(request: Request, user_id : int):
@@ -70,11 +77,11 @@ def Login(request : Request):
 						password = password)
 	
 	if user:
-		login(request, user)
-		return Response('logged in')
+		token_data = obtain_auth_token(request._request)
+		return Response({'token': token_data.key})
 
 	else:
-		return Response('Invalid info')
+		return Response('Invalid credentials')
 
 
 @api_view(['GET'])

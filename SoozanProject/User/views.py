@@ -4,11 +4,12 @@ from django.db.utils import  IntegrityError
 
 
 # TODO : don't forget to use permission classes instead of login_required
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
-from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.authtoken.models import Token
 
 
 from User.models import User
@@ -69,19 +70,25 @@ def Register(request : Request):
 
 @api_view(['POST'])
 def Login(request : Request):
-	number = request.data['number']
-	password = request.data['password']
+	number = request.data.get('number')
+	password = request.data.get('password')
 	
 	# checking user login data
 	user = authenticate(request,username = number,
 						password = password)
 	
+
 	if user:
-		token_data = obtain_auth_token(request._request)
-		return Response({'token': token_data.key})
+		# serving users auth token
+		token, created = Token.objects.get_or_create(user=user)
+
+		return Response({'message' : 'Login was successfull',
+				   	'token': token.key},
+					status=status.HTTP_200_OK)
 
 	else:
-		return Response('Invalid credentials')
+		return Response({'message' : 'Login Failed (Invalid password or username)'},
+				  	status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['GET'])

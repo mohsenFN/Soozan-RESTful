@@ -1,9 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.utils import  IntegrityError
+from django.contrib.auth.password_validation import validate_password
 
-
-# TODO : don't forget to use permission classes instead of login_required
 from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.request import Request
@@ -40,15 +39,34 @@ def SingleUserView(request: Request, user_id : int):
     return Response(serializer.data)
 
 
+
+
 @api_view(['POST'])
 def Register(request : Request):
 	# Passing user data to serializer
 	user_serializer = UserSerializer(data = request.data, many = False)
 
-	# TODO: check entered number is unique before validating
 
 	if not user_serializer.is_valid():
-		return Response("Invalid Data")
+
+		if User.objects.filter(number = user_serializer.data['number']):
+			return Response({'detail' : 'Phone numbers dedicated to an account already.'},
+				   		status=status.HTTP_409_CONFLICT)
+		
+		if not isinstance(user.data['is_artist'], bool):
+			return Response({'detail' : 'User type is not specified'},
+							status=status.HTTP_400_BAD_REQUEST)
+		
+		return Response({"detail" : "Invalid data"},
+				  		status=status.HTTP_400_BAD_REQUEST)
+	
+
+	try:
+		validate_password(user_serializer.data['password'])
+	except Exception as e:
+		return Response({'detail' : e},
+				   		status=status.HTTP_400_BAD_REQUEST)
+
 	
 	# creating a user if data is valid
 	user = user_serializer.create(user_serializer.validated_data)
@@ -57,11 +75,9 @@ def Register(request : Request):
 
 	# creating user profile based on user data
 	if user_serializer.validated_data['is_artist']:
-		'''Artist'''
 		profile = Artist(user = user)
 	
 	else:
-		'''Applicant'''
 		profile = Applicant(user = user)
 
 	# saving derived profile model

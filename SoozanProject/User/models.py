@@ -7,7 +7,7 @@ from django.core.validators import MinLengthValidator
 class User(AbstractBaseUser, PermissionsMixin):
 
     number = models.CharField(max_length = 11, unique = True)
-    password = models.CharField(max_length=88) # validate password length in views
+    password = models.CharField(max_length=88)
     is_artist = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

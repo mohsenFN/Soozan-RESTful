@@ -95,12 +95,6 @@ def Login(request : Request):
 
 
 @api_view(['GET'])
-def Logout(request : Request):
-	logout(request)
-	return Response('Logged out.')
-
-
-@api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def DashBoard(request : Request):

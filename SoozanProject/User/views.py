@@ -5,11 +5,14 @@ from django.db.utils import  IntegrityError
 
 # TODO : don't forget to use permission classes instead of login_required
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
+
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 from User.models import User
@@ -82,12 +85,12 @@ def Login(request : Request):
 		# serving users auth token
 		token, created = Token.objects.get_or_create(user=user)
 
-		return Response({'message' : 'Login was successfull',
+		return Response({'detail' : 'Login was successfull',
 				   	'token': token.key},
 					status=status.HTTP_200_OK)
 
 	else:
-		return Response({'message' : 'Login Failed (Invalid password or username)'},
+		return Response({'detail' : 'Login Failed (Invalid password or username)'},
 				  	status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -97,8 +100,9 @@ def Logout(request : Request):
 	return Response('Logged out.')
 
 
-@login_required()
 @api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def DashBoard(request : Request):
 
 	user = User.objects.get(number = request.user.number)
@@ -116,11 +120,14 @@ def DashBoard(request : Request):
 		return Response(serializer.data)
 
 
-@login_required
+
 @api_view(['DELETE'])
-def Delete(request : Request):
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def DeleteUser(request : Request):
 
 	User.objects.get(number = request.user).delete()
-	return Response('User Deleted')
+	return Response('User Deleted',
+					status=status.HTTP_200_OK)
 
 	

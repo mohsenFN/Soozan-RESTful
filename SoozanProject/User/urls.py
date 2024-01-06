@@ -7,5 +7,5 @@ urlpatterns = [
     path('login', views.Login),
     path('logout', views.Logout),
     path('dash', views.DashBoard),
-    path('del', views.Delete)
+    path('del', views.DeleteUser)
 ]

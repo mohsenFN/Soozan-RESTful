@@ -1,6 +1,5 @@
 from django.db import models
 from User.models import User
-from Request.models import Request
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Applicant(models.Model):

@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'Artist',
     'Applicant',
     'Post',
-    'Request',
 
     'rest_framework',
     'rest_framework.authtoken'

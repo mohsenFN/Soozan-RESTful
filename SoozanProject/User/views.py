@@ -21,7 +21,7 @@ from User.models import User
 from User.serializers import UserSerializer
 
 from Artist.models import Artist
-from Artist.serializers import ArtistSerializer, ArtistDashBoardSerializer
+from Artist.serializers import ArtistDashBoardSerializer
 
 from Applicant.models import Applicant
 from Applicant.serializers import ApplicantDashBoardSerializer

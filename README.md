@@ -1,13 +1,28 @@
-Ishalla baadan ye readme sexy minevisim 
+# Soozan Restful App
 
+## Overview
 
-Number 1 is awake !
-11228
+Soozan Restful is a Django-based RESTful web application that provides a platform for managing and organizing various tasks. This application is designed to offer a straightforward and efficient way to handle tasks through a RESTful API.
 
-   -
-  -
- - -
-- -
- - -
-  -
-   -
+## Features
+
+- **Task Management:** Create, update, delete, and retrieve tasks using the RESTful API.
+- **User Authentication:** Secure your data with user authentication to ensure only authorized users can access and manage tasks.
+- **API Documentation:** Explore and understand the available API endpoints and functionalities through comprehensive documentation.
+
+## Installation
+
+Follow these steps to set up and run the Soozan Restful app:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/mohsenFN/Soozan-restful.git
+
+   cd Soozan-restful
+   virtualenv venv
+   source venv/bin/activate
+
+   pip install -r requirements
+
+   python manage.py runserver (smoke test)
+   ```

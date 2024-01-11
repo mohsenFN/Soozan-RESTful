@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.contrib.auth.hashers import make_password
 
 from Artist.models import Artist
-from Applicant.models import Applicant
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

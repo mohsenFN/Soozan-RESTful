@@ -1,5 +1,9 @@
-
+TODO : Try finding another way (
+    more detailed for capital cities like tehran
+    )
+    
 City Codes (Used in Artist/location)
+
     1 	تهران
     ۲ 	خوزستان
     ۳ 	بوشهر
@@ -32,13 +36,3 @@ City Codes (Used in Artist/location)
     ۳۰ 	چهارمحال و بختیاری
     ۳۱ 	خراسان شمالی
     ۳۲ 	خراسان جنوبی
-
-
-
-
-## Soozan Rank
-1 -> Basic verified Artist
-2 -> Valid IG address
-3 -> 3 posts
-4 -> 6 requests
-5 -> Soozan badge

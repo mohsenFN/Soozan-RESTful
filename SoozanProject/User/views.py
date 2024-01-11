@@ -43,7 +43,6 @@ def user_register(request : Request):
 		return Response({"detail" : "Invalid data"},
 				  		status=status.HTTP_400_BAD_REQUEST)
 	
-	breakpoint()
 
 	try:
 		validate_password(user_serializer.data['password'])

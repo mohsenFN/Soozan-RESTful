@@ -38,13 +38,12 @@ def user_register(request : Request):
 			return Response({'detail' : 'Phone numbers dedicated to an account already.'},
 				   		status=status.HTTP_409_CONFLICT)
 		
-		if not isinstance(user.data['is_artist'], bool):
-			return Response({'detail' : 'User type is not specified'},
-							status=status.HTTP_400_BAD_REQUEST)
+		# NOTE: not checking if is_artist is set or no (def value is False)
 		
 		return Response({"detail" : "Invalid data"},
 				  		status=status.HTTP_400_BAD_REQUEST)
 	
+	breakpoint()
 
 	try:
 		validate_password(user_serializer.data['password'])

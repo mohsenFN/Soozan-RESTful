@@ -108,7 +108,7 @@ def get_user_dashboard(request : Request):
 	user = User.objects.get(number = request.user.number)
 	
 
-	# TODD: try using views from each profile model not loading them here
+	# TODO: try using views from each profile model not loading them here
 	if request.user.is_artist:
 		queryset = Artist.objects.get(user = user)
 		serializer = ArtistDashBoardSerializer(queryset)

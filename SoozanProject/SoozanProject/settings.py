@@ -33,22 +33,27 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+VENDOR_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
 
-    'User',
-    'Artist',
-    'Applicant',
-    'Post',
-
+DRF_APPS = [
     'rest_framework',
     'rest_framework.authtoken'
 ]
+
+LOCAL_APPS = [
+    'User',
+    'Artist',
+    'Post'
+]
+
+INSTALLED_APPS = VENDOR_APPS + DRF_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -5,4 +5,4 @@ class AuthorAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Applicant, AuthorAdmin)
+# admin.site.register(Applicant, AuthorAdmin)

@@ -14,7 +14,7 @@ class Post(models.Model):
     caption =models.CharField(max_length = 512)
     tags = models.ManyToManyField(Tag)
     image = models.ImageField(upload_to='post_images/')
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):

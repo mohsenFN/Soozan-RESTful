@@ -23,10 +23,6 @@ from User.serializers import UserSerializer
 from Artist.models import Artist
 from Artist.serializers import ArtistDashBoardSerializer
 
-from Applicant.models import Applicant
-from Applicant.serializers import ApplicantDashBoardSerializer
-
-
 # TODO: remove non-standard responses and use clean responses
 
 
@@ -98,26 +94,6 @@ def user_login(request : Request):
 	else:
 		return Response({'detail' : 'Login Failed (Invalid password or username)'},
 				  	status=status.HTTP_401_UNAUTHORIZED)
-
-
-@api_view(['GET'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
-def get_user_dashboard(request : Request):
-
-	user = User.objects.get(number = request.user.number)
-	
-
-	# TODO: try using views from each profile model not loading them here
-	if request.user.is_artist:
-		queryset = Artist.objects.get(user = user)
-		serializer = ArtistDashBoardSerializer(queryset)
-		return Response(serializer.data)
-
-	else:
-		queryset = Applicant.objects.get(user = user)
-		serializer = ApplicantDashBoardSerializer(queryset)
-		return Response(serializer.data)
 
 
 

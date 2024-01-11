@@ -63,7 +63,8 @@ def user_register(request : Request):
 		profile = Artist(user = user)
 	
 	else:
-		profile = Applicant(user = user)
+		return Response({'detail' : "Can't register Applicant users for a while."},
+				  	status=status.HTTP_400_BAD_REQUEST)
 
 	# saving derived profile model
 	profile.save()

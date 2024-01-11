@@ -11,7 +11,11 @@ from Post.serializers import TagSerializer
 @api_view(['GET'])
 def get_tags_list(request : Request):
     queryset = Tag.objects.all()
-
-    serializer = TagSerializer(queryset)
-
+    serializer = TagSerializer(queryset, many = True)
     return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def new_post(request : Request):
+    pass

@@ -24,11 +24,18 @@ def get_tags_list(request : Request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsArtistPermission])
 def new_post_from_artist(request : Request):
+
     serializer = UploadPostSerializer(data = request.data)
 
-    if not serializer.is_valid():
-        # TODO: validate more defined and send explained error msgs
-        return Response({'detail' : 'Invalid data.'})
+    if serializer.is_valid():
+        post = serializer.create(user = request.user,
+                                           validated_data=serializer.validated_data)
+        
+        post.save()
+        return Response({'detail' : 'data saved'})
     
-    serializer.save()
-    return Response({'detail' : 'data saved'})
+    # TODO: validate more defined and send explained error msgs
+    return Response({'detail' : 'Invalid data.'})
+    
+    
+    

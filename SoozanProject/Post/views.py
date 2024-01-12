@@ -32,10 +32,8 @@ def new_post_from_artist(request : Request):
                                            validated_data=serializer.validated_data)
         
         post.save()
-        return Response({'detail' : 'data saved'})
+        return Response({'detail' : 'New post saved', 'post id' : post.id},
+                        status=status.HTTP_201_CREATED)
     
     # TODO: validate more defined and send explained error msgs
     return Response({'detail' : 'Invalid data.'})
-    
-    
-    

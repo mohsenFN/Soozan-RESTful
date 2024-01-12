@@ -35,5 +35,16 @@ def new_post_from_artist(request : Request):
         return Response({'detail' : 'New post saved', 'post id' : post.id},
                         status=status.HTTP_201_CREATED)
     
-    # TODO: validate more defined and send explained error msgs
+    if serializer.data.get('image') in [None, '']:
+        return Response({'detail' : 'No image file is specified'},
+                        status=status.HTTP_400_BAD_REQUEST)
+    
+    if serializer.data.get('caption') in [None, '']:
+        return Response({'detail' : 'No caption is in form-data'},
+                        status=status.HTTP_400_BAD_REQUEST)
+    
+    if serializer.data.get('tags') in [None, '']:
+        return Response({'detail' : 'No tags is in form-data'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
     return Response({'detail' : 'Invalid data.'})

@@ -11,9 +11,9 @@ class Tag(models.Model):
 
 class Post(models.Model):
     artist = models.ForeignKey(User, on_delete = models.CASCADE, related_name='posts')
-    caption =models.CharField(max_length = 512)
+    caption =models.CharField(max_length = 512, blank = False)
     tags = models.ManyToManyField(Tag)
-    image = models.ImageField(upload_to='post_images/')
+    image = models.ImageField(upload_to='post_images/', null = False, blank = False)
     pub_date = models.DateTimeField(auto_now_add=True)
     
 

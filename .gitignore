@@ -4,3 +4,5 @@
 /venv
 *.swp
 */.vscode
+
+/SoozanProject/media/post_images/*

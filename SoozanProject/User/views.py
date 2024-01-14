@@ -34,7 +34,6 @@ def user_register(request : Request):
 
 
 	if not serializer.is_valid():
-		breakpoint()
 		if User.objects.filter(number = serializer.data['number']):
 			return Response({'detail' : 'Phone numbers dedicated to an account already.'},
 				   		status=status.HTTP_409_CONFLICT)
@@ -44,7 +43,7 @@ def user_register(request : Request):
 	
 
 	try:
-		validate_password(serializer.data['password'])
+		validate_password(serializer.validated_data['password'])
 	except ValidationError as e:
 		return Response({'detail' : e.messages},
 				   		status=status.HTTP_400_BAD_REQUEST)
@@ -55,8 +54,7 @@ def user_register(request : Request):
 
 	# creating user profile based on user data
 	if serializer.validated_data.get('is_artist', False):
-		profile = Artist(user=user)
-		profile.save()
+		Artist.objects.create(user=user)
 	
 	else:
 		return Response({'detail' : "Can't register Applicant users for a while."},

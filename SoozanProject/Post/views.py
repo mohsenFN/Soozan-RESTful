@@ -23,7 +23,7 @@ def get_tags_list(request : Request):
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsArtistPermission])
-def new_post_from_artist(request):
+def new_post(request):
     serializer = UploadPostSerializer(data=request.data, context={'request': request})
 
     if serializer.is_valid():

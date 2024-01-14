@@ -54,15 +54,13 @@ def user_register(request : Request):
 	user = serializer.save()
 
 	# creating user profile based on user data
-	if serializer.validated_data['is_artist']:
-		profile = Artist(user = user)
+	if serializer.validated_data.get('is_artist', False):
+		profile = Artist(user=user)
+		profile.save()
 	
 	else:
 		return Response({'detail' : "Can't register Applicant users for a while."},
-				  	status=status.HTTP_400_BAD_REQUEST)
-
-	# saving derived profile model
-	profile.save()
+				  		status=status.HTTP_400_BAD_REQUEST)
 	
 	# return more logical responses
 	return Response({'detail' : f'Registered successfuly as {user.id} id.'},

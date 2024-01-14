@@ -1,5 +1,15 @@
 # Soozan Restful App
 
+## To-Do
+- [ ] Cleaner error handling in User.views (Like Post.views)
+- [ ] save post images with a specific name set
+- [ ] Implement more secure authentication method
+- [ ] Write tests
+- [ ] Update documentation
+- [ ] Update readme
+- [ ] Celebrate the success! 🎉
+
+
 ## Overview
 
 Soozan Restful is a Django-based RESTful web application that provides a platform for managing and organizing various tasks. This application is designed to offer a straightforward and efficient way to handle tasks through a RESTful API.
@@ -26,3 +36,6 @@ Follow these steps to set up and run the Soozan Restful app:
 
    python manage.py runserver (smoke test)
    ```
+
+
+

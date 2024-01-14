@@ -46,7 +46,7 @@ def user_register(request : Request):
 	try:
 		validate_password(serializer.data['password'])
 	except ValidationError as e:
-		return Response({'detail' : e.message},
+		return Response({'detail' : e.messages},
 				   		status=status.HTTP_400_BAD_REQUEST)
 
 	

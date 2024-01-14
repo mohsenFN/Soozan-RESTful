@@ -15,5 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
         				number = validated_data['number'],
         				is_artist = validated_data['is_artist'],
         				date_joined = timezone.now())
+        user.save()
 
         return user

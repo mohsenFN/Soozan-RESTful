@@ -14,11 +14,11 @@ class UploadPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['caption', 'tags', 'image']
+        fields = ['caption', 'tags', 'image']  
 
-    def create(self, user, validated_data):
+    def create(self, validated_data):
         tag_ids = validated_data.pop('tags', [])
         tags = Tag.objects.filter(id__in=tag_ids)
-        post = Post.objects.create(artist = user, **validated_data)
+        post = Post.objects.create(artist=self.context['request'].user, **validated_data)
         post.tags.set(tags)
         return post

@@ -51,9 +51,7 @@ def user_register(request : Request):
 
 	
 	# creating a user if data is valid
-	user = serializer.create(serializer.validated_data)
-	user.save()
-
+	user = serializer.save()
 
 	# creating user profile based on user data
 	if serializer.validated_data['is_artist']:

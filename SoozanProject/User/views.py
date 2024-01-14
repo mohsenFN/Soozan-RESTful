@@ -29,35 +29,33 @@ from Artist.serializers import ArtistDashBoardSerializer
 @api_view(['POST'])
 def user_register(request : Request):
 	# Passing user data to serializer
-	user_serializer = UserSerializer(data = request.data, many = False)
+	serializer = UserSerializer(data = request.data, many = False)
 
 
-	if not user_serializer.is_valid():
-
-		if User.objects.filter(number = user_serializer.data['number']):
+	if not serializer.is_valid():
+		breakpoint()
+		if User.objects.filter(number = serializer.data['number']):
 			return Response({'detail' : 'Phone numbers dedicated to an account already.'},
 				   		status=status.HTTP_409_CONFLICT)
 		
-		# NOTE: not checking if is_artist is set or no (def value is False)
-		
-		return Response({"detail" : "Invalid data"},
+		return Response({'detail': 'Invalid data', 'errors': serializer.errors},
 				  		status=status.HTTP_400_BAD_REQUEST)
 	
 
 	try:
-		validate_password(user_serializer.data['password'])
+		validate_password(serializer.data['password'])
 	except Exception as e:
 		return Response({'detail' : e},
 				   		status=status.HTTP_400_BAD_REQUEST)
 
 	
 	# creating a user if data is valid
-	user = user_serializer.create(user_serializer.validated_data)
+	user = serializer.create(serializer.validated_data)
 	user.save()
 
 
 	# creating user profile based on user data
-	if user_serializer.validated_data['is_artist']:
+	if serializer.validated_data['is_artist']:
 		profile = Artist(user = user)
 	
 	else:

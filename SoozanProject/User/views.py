@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.utils import  IntegrityError
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 from rest_framework import status
 from rest_framework.decorators import (
@@ -44,8 +45,8 @@ def user_register(request : Request):
 
 	try:
 		validate_password(serializer.data['password'])
-	except Exception as e:
-		return Response({'detail' : e},
+	except ValidationError as e:
+		return Response({'detail' : e.message},
 				   		status=status.HTTP_400_BAD_REQUEST)
 
 	

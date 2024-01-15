@@ -1,28 +1,30 @@
+# Standard Library
+from django.core.exceptions import ValidationError
+from django.db.utils import IntegrityError
+
+# Django
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.db.utils import  IntegrityError
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
 
+# Third-Party Packages
 from rest_framework import status
 from rest_framework.decorators import (
-	api_view, authentication_classes, permission_classes
+    api_view, authentication_classes, permission_classes
 )
-                                       
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
-
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-
+# Local Imports
 from User.models import User
 from User.serializers import UserSerializer
-
 from Artist.models import Artist
 from Artist.serializers import ArtistDashBoardSerializer
+
 
 # TODO: remove non-standard responses and use clean responses
 

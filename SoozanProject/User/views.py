@@ -94,6 +94,6 @@ def user_login(request : Request):
 @permission_classes([IsAuthenticated])
 def delete_user(request : Request):
 
-	User.objects.get(number = request.user).delete()
-	return Response('User Deleted',
-					status=status.HTTP_200_OK)
+	user = request.user
+	user.delete()
+	return Response('User deleted successfully.' ,status=status.HTTP_200_OK)

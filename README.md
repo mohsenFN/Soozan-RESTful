@@ -3,6 +3,7 @@
 ## To-Do
 - [x] Cleaner error handling in User.views (Like Post.views)
 - [ ] Save post images with a specific name set
+- [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
 - [ ] Implement more secure authentication method
 - [ ] Write tests
 - [ ] Update documentation

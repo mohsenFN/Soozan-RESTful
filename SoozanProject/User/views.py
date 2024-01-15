@@ -46,13 +46,11 @@ def user_register(request : Request):
 	except ValidationError as e:
 		return Response({'detail' : e.messages},
 				   		status=status.HTTP_400_BAD_REQUEST)
-
 	
-	# Creating a user if data is valid
-	user = serializer.save()
 
 	# Creating user profile based on user data
 	if serializer.validated_data.get('is_artist', False):
+		user = serializer.save()
 		Artist.objects.create(user=user)
 	
 	else:

@@ -49,9 +49,9 @@ DRF_APPS = [
 ]
 
 LOCAL_APPS = [
-    'User',
-    'Artist',
-    'Post'
+    'user',
+    'artist',
+    'post'
 ]
 
 INSTALLED_APPS = VENDOR_APPS + DRF_APPS + LOCAL_APPS
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'User.User'
+AUTH_USER_MODEL = 'user.User'
 
 
 # Internationalization
@@ -148,8 +148,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication']
 }
-
-
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

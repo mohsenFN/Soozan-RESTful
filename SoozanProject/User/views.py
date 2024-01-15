@@ -91,4 +91,4 @@ def delete_user(request : Request):
 
 	user = request.user
 	user.delete()
-	return Response('User deleted successfully.' ,status=status.HTTP_204_OK)
+	return Response('User deleted successfully.' ,status=status.HTTP_204_NO_CONTENT)

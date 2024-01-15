@@ -1,7 +1,7 @@
 # Soozan Restful App
 
 ## To-Do
-- [ ] Cleaner error handling in User.views (Like Post.views)
+- [x] Cleaner error handling in User.views (Like Post.views)
 - [ ] Save post images with a specific name set
 - [ ] Implement more secure authentication method
 - [ ] Write tests

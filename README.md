@@ -7,6 +7,7 @@
 - [ ] Implement more secure authentication method
 - [ ] Create a document or list end-points
 - [ ] Write tests
+- [ ] Use rate limit for views
 - [ ] Update documentation
 - [ ] Update readme
 - [ ] Celebrate the success! 🎉

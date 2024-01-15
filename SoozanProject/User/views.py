@@ -66,26 +66,25 @@ def user_register(request : Request):
 
 
 @api_view(['POST'])
-def user_login(request : Request):
-	number = request.data.get('number')
-	password = request.data.get('password')
-	
-	# checking user login data
-	user = authenticate(request,username = number,
-						password = password)
-	
+def user_login(request: Request):
+    number = request.data.get('number')
+    password = request.data.get('password')
 
-	if user:
-		# serving users auth token
-		token, created = Token.objects.get_or_create(user=user)
+    # Checking user login data
+    user = authenticate(request, username=number, password=password)
 
-		return Response({'detail' : 'Login was successfull',
-				   	'token': token.key},
-					status=status.HTTP_200_OK)
+    if user:
+        # Serving user's auth token
+        token, created = Token.objects.get_or_create(user=user)
 
-	else:
-		return Response({'detail' : 'Login Failed (Invalid password or username)'},
-				  	status=status.HTTP_401_UNAUTHORIZED)
+        return Response({
+            'detail': 'Login was successful',
+            'token': token.key
+        }, status=status.HTTP_200_OK)
+    else:
+        return Response({
+            'detail': 'Login Failed (Invalid password or username)'
+        }, status=status.HTTP_401_UNAUTHORIZED)
 
 
 

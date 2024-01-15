@@ -2,7 +2,7 @@
 
 ## To-Do
 - [ ] Cleaner error handling in User.views (Like Post.views)
-- [ ] save post images with a specific name set
+- [ ] Save post images with a specific name set
 - [ ] Implement more secure authentication method
 - [ ] Write tests
 - [ ] Update documentation
@@ -12,7 +12,7 @@
 
 ## Overview
 
-Soozan Restful is a Django-based RESTful web application that provides a platform for managing and organizing various tasks. This application is designed to offer a straightforward and efficient way to handle tasks through a RESTful API.
+Soozan Restful is a Django-based RESTful web application that provides a platform for tattoo enthusiasts; With Soozan-RESTful you can manage a secure and robust system for connecting tattoo artists and clients. This application is designed to offer a straightforward and efficient way to handle data through a RESTful API.
 
 ## Features
 
@@ -27,15 +27,21 @@ Follow these steps to set up and run the Soozan Restful app:
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/mohsenFN/Soozan-restful.git
-
-   cd Soozan-restful
-   virtualenv venv
-   source venv/bin/activate
-
-   pip install -r requirements
-
-   python manage.py runserver (smoke test)
    ```
 
+2. **Run a Virtual environment:**
+   ```bash
+   cd Soozan-restful
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
+3. **Install requirements:**
+   ```bash
+   pip install -r requirements
+   ```
 
+4. **Take a Smoke Test:**
+   ```bash
+   python manage.py runserver
+   ```

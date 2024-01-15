@@ -26,9 +26,6 @@ from Artist.models import Artist
 from Artist.serializers import ArtistDashBoardSerializer
 
 
-# TODO: remove non-standard responses and use clean responses
-
-
 @api_view(['POST'])
 def user_register(request : Request):
 	# Passing user data to serializer
@@ -51,10 +48,10 @@ def user_register(request : Request):
 				   		status=status.HTTP_400_BAD_REQUEST)
 
 	
-	# creating a user if data is valid
+	# Creating a user if data is valid
 	user = serializer.save()
 
-	# creating user profile based on user data
+	# Creating user profile based on user data
 	if serializer.validated_data.get('is_artist', False):
 		Artist.objects.create(user=user)
 	
@@ -62,7 +59,7 @@ def user_register(request : Request):
 		return Response({'detail' : "Can't register Applicant users for a while."},
 				  		status=status.HTTP_400_BAD_REQUEST)
 	
-	# return more logical responses
+	# Return more logical responses
 	return Response({'detail' : f'Registered successfuly as {user.id} id.'},
 				 	status=status.HTTP_200_OK)
 
@@ -87,7 +84,6 @@ def user_login(request: Request):
         return Response({
             'detail': 'Login Failed (Invalid password or username)'
         }, status=status.HTTP_401_UNAUTHORIZED)
-
 
 
 @api_view(['DELETE'])

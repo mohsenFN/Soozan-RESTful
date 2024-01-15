@@ -66,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'SoozanProject.urls'
+ROOT_URLCONF = 'soozanProject.urls'
 
 TEMPLATES = [
     {
@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SoozanProject.wsgi.application'
+WSGI_APPLICATION = 'soozanProject.wsgi.application'
 
 
 # Database

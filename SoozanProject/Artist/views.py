@@ -7,26 +7,17 @@ from User.models import User
 
 
 @api_view(['GET'])
-def artist_profile(request : Request, user_id : int):
+def artist_profile(request: Request, user_id: int):
 
-    # check if user exists 
-
+    # Check if user exists
     try:
-        user = User.objects.get(id = user_id)
-
+        user = User.objects.get(id=user_id)
     except User.DoesNotExist:
-        return Response({'detail' : 'Artist does not exist'},
-                        status=status.HTTP_404_NOT_FOUND)
-    
-    # check if user is artist
+        return Response({'detail': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-
+    # If user is not artist send an error message
     if not user.is_artist:
-        return Response({'detail' : 'Artist does not exist'},
-                        status=status.HTTP_404_NOT_FOUND)
+        return Response({'detail': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-    return Response(user_id)
-
-    
-
-
+    # Return artist's profile (or other relevant data)
+    return Response({'user_id': user_id})

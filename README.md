@@ -45,3 +45,17 @@ Follow these steps to set up and run the Soozan Restful app:
    ```bash
    python manage.py runserver
    ```
+
+
+
+## How to generate database diagram
+
+1. **Change directory to access manage.py:**
+   ```bash
+   cd SoozanProject
+   ```
+
+2. **Use graph models to generate diagram:**
+   ```bash
+   python manage.py graph_models -a -o ../Documentation/models_diagram.pdf
+   ```

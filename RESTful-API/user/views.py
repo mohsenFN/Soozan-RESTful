@@ -20,10 +20,10 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 # Local Imports
-from User.models import User
-from User.serializers import UserSerializer
-from Artist.models import Artist
-from Artist.serializers import ArtistDashBoardSerializer
+from user.models import User
+from user.serializers import UserSerializer
+from artist.models import Artist
+from artist.serializers import ArtistDashBoardSerializer
 
 
 @api_view(['POST'])

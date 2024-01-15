@@ -1,8 +1,8 @@
 from django.contrib import admin
-from Artist.models import Artist
+from post.models import Post
 
 class AuthorAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Artist, AuthorAdmin)
+admin.site.register(Post, AuthorAdmin)

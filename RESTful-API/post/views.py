@@ -8,10 +8,10 @@ from rest_framework.request import Request
 from rest_framework.authentication import TokenAuthentication
 
 # Local Imports
-from User.permissions import IsArtistPermission, IsOwnerOrReadOnly
+from user.permissions import IsArtistPermission, IsOwnerOrReadOnly
 
-from Post.models import Post, Tag
-from Post.serializers import TagSerializer, UploadPostSerializer
+from post.models import Post, Tag
+from post.serializers import TagSerializer, UploadPostSerializer
 
 
 @api_view(['GET'])

@@ -1,5 +1,5 @@
 from django.db import models
-from User.models import User
+from user.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Applicant(models.Model):
@@ -8,4 +8,3 @@ class Applicant(models.Model):
     location = models.IntegerField(validators = [MinValueValidator(0),
                                                     MaxValueValidator(32)],
                                                     default = 0) # BASED ON docs.md
-

@@ -1,5 +1,5 @@
 from django.db import models
-from User.models import User
+from user.models import User
 
 class Tag(models.Model):
     name_en = models.CharField(max_length=50, unique=True)

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 ''' Vendor '''
-from User.models import User
+from user.models import User
 
 class UserAdminClass(UserAdmin):
 

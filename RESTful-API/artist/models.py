@@ -1,5 +1,5 @@
 from django.db import models
-from User.models import User
+from user.models import User
 
 from django.core.validators import MinValueValidator, MaxValueValidator
 

@@ -3,7 +3,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from User.models import User
+from user.models import User
 
 
 @api_view(['GET'])

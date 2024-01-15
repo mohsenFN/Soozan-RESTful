@@ -1,9 +1,9 @@
-from User.models import User
 from rest_framework import serializers
 from django.utils import timezone
 from django.contrib.auth.hashers import make_password
 
-from Artist.models import Artist
+from artist.models import Artist
+from user.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

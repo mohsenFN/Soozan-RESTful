@@ -1,7 +1,6 @@
 from django.urls import include, path
 
-from Artist import views
-
+from artist import views
 
 
 urlpatterns = [

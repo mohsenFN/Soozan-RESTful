@@ -2,10 +2,11 @@
 
 ## To-Do
 - [x] Cleaner error handling in User.views (Like Post.views)
+- [ ] Explain dirs and files in you django project
 - [ ] Save post images with a specific name set
 - [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
-- [ ] Implement more secure authentication method
-- [ ] Create a document or list end-points
+- [x] Use JWT instead of token-based-authentication
+- [ ] Create a documentation for end-points
 - [ ] Write tests
 - [ ] Use rate limit for views
 - [ ] Update documentation

@@ -2,8 +2,9 @@
 
 ## To-Do
 - [x] Cleaner error handling in User.views (Like Post.views)
-- [ ] Explain dirs and files in you django project
+- [x] Explain dirs and files in you django project (End of README)
 - [x] Save post images with a specific name set --> Using UUID4
+- [ ] Custom error message for simplejwt user_not_found response
 - [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
 - [x] Use JWT instead of token-based-authentication
 - [ ] Create a documentation for end-points

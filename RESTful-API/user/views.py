@@ -17,8 +17,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Local Imports
 from user.models import User
@@ -72,21 +72,22 @@ def user_login(request: Request):
     user = authenticate(request, username=number, password=password)
 
     if user:
-        # Serving user's auth token
-        token, created = Token.objects.get_or_create(user=user)
-
-        return Response({
-            'detail': 'Login was successful',
-            'token': token.key
-        }, status=status.HTTP_200_OK)
-    else:
-        return Response({
-            'detail': 'Login Failed (Invalid password or username)'
-        }, status=status.HTTP_401_UNAUTHORIZED)
+	    credentials = {'number': number, 'password': password}
+	    serializer = TokenObtainPairSerializer(data=credentials)
+	    
+	    serializer.is_valid(raise_exception=True)
+	    
+	    tokens = serializer.validated_data
+	    
+	    access_token = tokens['access']
+	    refresh_token = tokens['refresh']
+	    
+	    return Response({'access_token': access_token, 'refresh_token': refresh_token},
+	                    status=status.HTTP_200_OK)
 
 
 @api_view(['DELETE'])
-@authentication_classes(['rest_framework_simplejwt.authentication.JWTAuthentication'])
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_user(request : Request):
 

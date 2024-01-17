@@ -45,7 +45,7 @@ VENDOR_APPS = [
 
 DRF_APPS = [
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework_simplejwt',
 ]
 
 LOCAL_APPS = [

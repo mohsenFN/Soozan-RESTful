@@ -5,7 +5,7 @@ from rest_framework.decorators import (
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework.authentication import TokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Local Imports
 from user.permissions import IsArtistPermission, IsOwnerOrReadOnly
@@ -23,7 +23,7 @@ def get_tags_list(request : Request):
 
 
 @api_view(['POST'])
-@authentication_classes([TokenAuthentication])
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsArtistPermission])
 def new_post(request):
     serializer = UploadPostSerializer(data=request.data, context={'request': request})
@@ -36,7 +36,7 @@ def new_post(request):
 
 
 @api_view(['PATCH'])
-@authentication_classes([TokenAuthentication])
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsArtistPermission, IsOwnerOrReadOnly])
 def update_post(request, post_id):
     try:

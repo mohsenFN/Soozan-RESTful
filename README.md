@@ -50,7 +50,7 @@ Follow these steps to set up and run the Soozan Restful app:
    python manage.py runserver
    ```
 
-
+---
 
 ## How to generate database diagram
 
@@ -63,3 +63,31 @@ Follow these steps to set up and run the Soozan Restful app:
    ```bash
    python manage.py graph_models -a -o ../Documentation/models_diagram.pdf
    ```
+
+---
+
+# Directories and files explained !
+
+This repository contains the source code for the Soozan RESTful API project. The project is organized into the following directories and apps:
+
+## Project Directory (soozan_project)
+
+The main directory for the project, containing settings and the root URLs.
+
+## User App (user)
+
+An app for managing users and their authentication.
+
+## Artist & Applicant Apps (artist & applicant)
+
+Apps for managing artist and applicant profiles.
+
+## Post App (post)
+
+An app for managing posts shared by artists.
+
+**Note:**
+- If you save your first image, there should be a `media` directory, which includes the images for posts.
+
+Feel free to explore each directory and app for more details on the structure and functionality of the Soozan RESTful API.
+

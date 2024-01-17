@@ -3,7 +3,7 @@
 ## To-Do
 - [x] Cleaner error handling in User.views (Like Post.views)
 - [ ] Explain dirs and files in you django project
-- [ ] Save post images with a specific name set
+- [x] Save post images with a specific name set --> Using UUID4
 - [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
 - [x] Use JWT instead of token-based-authentication
 - [ ] Create a documentation for end-points

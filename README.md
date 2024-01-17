@@ -66,23 +66,23 @@ Follow these steps to set up and run the Soozan Restful app:
 
 ---
 
-# Directories and files explained !
+## Directories explained 
 
 This repository contains the source code for the Soozan RESTful API project. The project is organized into the following directories and apps:
 
-## Project Directory (soozan_project)
+### Project Directory (soozan_project)
 
 The main directory for the project, containing settings and the root URLs.
 
-## User App (user)
+### User App (user)
 
 An app for managing users and their authentication.
 
-## Artist & Applicant Apps (artist & applicant)
+### Artist & Applicant Apps (artist & applicant)
 
 Apps for managing artist and applicant profiles.
 
-## Post App (post)
+### Post App (post)
 
 An app for managing posts shared by artists.
 
@@ -91,3 +91,11 @@ An app for managing posts shared by artists.
 
 Feel free to explore each directory and app for more details on the structure and functionality of the Soozan RESTful API.
 
+---
+
+## Directories explained 
+
+### Soozan RESTful is using all default file names + some local script/modules
+
+user/manager.py : We need to use our own user manager class for using Django's AbstractBaseUser as our user.
+user/permissions.py : Custom authorization classes

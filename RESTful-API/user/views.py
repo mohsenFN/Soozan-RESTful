@@ -16,7 +16,6 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 # Local Imports
@@ -85,7 +84,7 @@ def user_login(request: Request):
 
 
 @api_view(['DELETE'])
-@authentication_classes([TokenAuthentication])
+@authentication_classes(['rest_framework_simplejwt.authentication.JWTAuthentication'])
 @permission_classes([IsAuthenticated])
 def delete_user(request : Request):
 

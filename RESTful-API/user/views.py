@@ -17,10 +17,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.authentication import JWTAuthentication
-
 # Local Imports
+from user.jwt_utils import get_tokens
 from user.models import User
 from user.serializers import UserSerializer
 from artist.models import Artist
@@ -72,15 +70,7 @@ def user_login(request: Request):
     user = authenticate(request, username=number, password=password)
 
     if user:
-	    credentials = {'number': number, 'password': password}
-	    serializer = TokenObtainPairSerializer(data=credentials)
-	    
-	    serializer.is_valid(raise_exception=True)
-	    
-	    tokens = serializer.validated_data
-	    
-	    access_token = tokens['access']
-	    refresh_token = tokens['refresh']
+	    access_token, refresh_token = get_tokens(number, password)
 	    
 	    return Response({'access_token': access_token, 'refresh_token': refresh_token},
 	                    status=status.HTTP_200_OK)

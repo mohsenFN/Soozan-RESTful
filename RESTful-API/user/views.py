@@ -81,6 +81,8 @@ def user_login(request: Request):
     return Response({'detail' : 'Authentication Failed'}, status=status.HTTP_401_UNAUTHORIZED)
 	
 @api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def new_token(request : Request):
 	refresh_token = request.data.get('refresh_token')
 

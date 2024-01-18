@@ -17,6 +17,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
 # Local Imports
 from user.jwt_utils import get_tokens
 from user.models import User
@@ -77,7 +79,24 @@ def user_login(request: Request):
 
     return Response({'detail' : 'Authentication Failed'}, status=status.HTTP_401_UNAUTHORIZED)
 	
+@api_view(['POST'])
+def new_token(request : Request):
+	refresh_token = request.data.get('refresh_token')
 
+	if not refresh_token:
+		return Response({'detail' : 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+	try:
+		refresh_token_obj = RefreshToken(refresh_token)
+	except Exception as e:
+		return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+	access_token = str(refresh_token_obj.access_token)
+	refresh_token = str(refresh_token_obj)
+
+	return Response({'access_token': access_token, 'refresh_token': refresh_token},
+                    status=status.HTTP_200_OK)
+	
 
 @api_view(['DELETE'])
 @authentication_classes([JWTAuthentication])

@@ -93,7 +93,7 @@ def new_token(request : Request):
 		return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 	access_token = str(refresh_token_obj.access_token)
-	refresh_token = str(refresh_token_obj)
+	refresh_token = str(RefreshToken.for_user(refresh_token_obj.user))
 
 	return Response({'access_token': access_token, 'refresh_token': refresh_token},
                     status=status.HTTP_200_OK)

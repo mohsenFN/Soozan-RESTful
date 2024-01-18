@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.db.utils import IntegrityError
 
 # Django
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 
@@ -92,7 +92,9 @@ def new_token(request : Request):
 	except Exception as e:
 		return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-	user = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
+	user_id = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
+	user_model = get_user_model()
+	user = user_model.objects.get(id=user_id)
 
 	access_token = str(refresh_token_obj.access_token)
 	refresh_token = str(RefreshToken.for_user(user))

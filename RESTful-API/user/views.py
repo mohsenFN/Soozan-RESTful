@@ -92,8 +92,10 @@ def new_token(request : Request):
 	except Exception as e:
 		return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
 
+	user = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
+
 	access_token = str(refresh_token_obj.access_token)
-	refresh_token = str(RefreshToken.for_user(refresh_token_obj.user))
+	refresh_token = str(RefreshToken.for_user(user))
 
 	return Response({'access_token': access_token, 'refresh_token': refresh_token},
                     status=status.HTTP_200_OK)

@@ -75,6 +75,9 @@ def user_login(request: Request):
 	    return Response({'access_token': access_token, 'refresh_token': refresh_token},
 	                    status=status.HTTP_200_OK)
 
+    return Response({'detail' : 'Authentication Failed'}, status=status.HTTP_401_UNAUTHORIZED)
+	
+
 
 @api_view(['DELETE'])
 @authentication_classes([JWTAuthentication])

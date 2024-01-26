@@ -14,6 +14,7 @@
 - [ ] Update readme
 - [ ] Celebrate the success! 🎉
 
+- [ ] BUG REPORT ! : U can refresh your token without using refresh token in user/get-token endpoint and also get a refresh token with a random refresh token as form-data
 
 ## Overview
 

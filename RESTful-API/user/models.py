@@ -23,3 +23,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.number
+
+# This model is for saving old JWT access tokens and invalidating them
+class BlacklistedToken(models.Model):
+    token = models.TextField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.token

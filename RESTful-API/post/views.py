@@ -52,3 +52,17 @@ def update_post(request, post_id):
         return Response({'detail': 'Post updated successfully'}, status=status.HTTP_200_OK)
 
     return Response({'detail': 'Invalid data', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+ @api_view(['DELETE'])
+ authentication_classes([JWTAuthentication])
+ @permission_classes([IsArtistPermission, IsOwnerOrReadOnly])
+ def delete_post(request, post_id):
+    try:
+        post = Post.objects.get(pk=post_id, artist=request.user)
+    except Post.DoesNotExist:
+        return Response({'detail': 'Post not found or you do not have permission to delete this post'},
+                        status=status.HTTP_404_NOT_FOUND)
+
+    post.delete()
+
+    return Response({'detail': 'Post deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

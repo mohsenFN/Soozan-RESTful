@@ -53,10 +53,11 @@ def update_post(request, post_id):
 
     return Response({'detail': 'Invalid data', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
- @api_view(['DELETE'])
- authentication_classes([JWTAuthentication])
- @permission_classes([IsArtistPermission, IsOwnerOrReadOnly])
- def delete_post(request, post_id):
+
+@api_view(['DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsArtistPermission, IsOwnerOrReadOnly])
+def delete_post(request, post_id):
     try:
         post = Post.objects.get(pk=post_id, artist=request.user)
     except Post.DoesNotExist:

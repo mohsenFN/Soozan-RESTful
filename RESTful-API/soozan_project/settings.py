@@ -57,16 +57,21 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = VENDOR_APPS + DRF_APPS + LOCAL_APPS
 
-MIDDLEWARE = [
+VENDOR_MIDDLEWARES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+]
+
+LOCAL_MIDDLEWARES = [
     'user.middleware.BlacklistTokenMiddleware'
 ]
+
+MIDDLEWARE = VENDOR_MIDDLEWARES + LOCAL_MIDDLEWARES
 
 ROOT_URLCONF = 'soozan_project.urls'
 

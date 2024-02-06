@@ -4,18 +4,15 @@
 - [x] Cleaner error handling in User.views (Like Post.views)
 - [x] Explain dirs and files in you django project (End of README)
 - [x] Save post images with a specific name set --> Using UUID4
-- [ ] Custom error message for simplejwt user_not_found response
+- [ ] Custom error message for simplejwt user_not_found response (I can't find this kinda error message)
 - [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
 - [x] Use JWT instead of token-based-authentication
-- [ ] Create a documentation for end-points
+- [*] Implement token black listing
+- [ ] Add users token to black list after logging out
 - [ ] Write tests
 - [ ] Use rate limit for views
-- [ ] Update documentation
-- [ ] Update readme
+- [ ] Create a documentation for end-points
 - [ ] Celebrate the success! 🎉
-- [ ] Implement token black listing
-
-- [ ] BUG REPORT ! : U can refresh your token without using refresh token in user/get-token endpoint and also get a refresh token with a random refresh token as form-data
 
 
 ## Overview

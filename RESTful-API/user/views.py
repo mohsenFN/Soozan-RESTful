@@ -93,8 +93,7 @@ def new_token(request : Request):
 		return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 	user_id = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
-	user_model = get_user_model()
-	user = user_model.objects.get(id=user_id)
+	user = User.objects.get(id=user_id)
 
 	access_token = str(refresh_token_obj.access_token)
 	refresh_token = str(RefreshToken.for_user(user))

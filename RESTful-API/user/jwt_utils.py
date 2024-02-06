@@ -1,4 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from user.models import BlacklistedToken
+
 
 def get_tokens(number, password):
     # Function to obtain tokens and handle token refresh logic
@@ -14,3 +16,7 @@ def get_tokens(number, password):
     # TODO: checking if the refresh token is about to expire and obtaining a new one
 
     return access_token, refresh_token
+
+
+def blacklist_token(token):
+    BlacklistedToken.objects.create(token=token)

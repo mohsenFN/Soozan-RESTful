@@ -30,38 +30,40 @@ from artist.serializers import ArtistDashBoardSerializer
 
 @api_view(['POST'])
 def user_register(request : Request):
-	# Passing user data to serializer
-	serializer = UserSerializer(data = request.data, many = False)
+    # Passing user data to serializer
+    serializer = UserSerializer(data = request.data, many = False)
 
 
-	if not serializer.is_valid():
-		if User.objects.filter(number = serializer.data['number']):
-			return Response({'detail' : 'Phone numbers dedicated to an account already.'},
-				   		status=status.HTTP_409_CONFLICT)
-		
-		return Response({'detail': 'Invalid data', 'errors': serializer.errors},
-				  		status=status.HTTP_400_BAD_REQUEST)
-	
+    if not serializer.is_valid():
+        if serializer.data.get("number") == None:
+            return Response({'detail' : 'No phone number is specified.'}, status=status.HTTP_400_BAD_REQUEST)
+        if User.objects.filter(number = serializer.data['number']):
+            return Response({'detail' : 'Phone numbers dedicated to an account already.'},
+                        status=status.HTTP_409_CONFLICT)
+        
+        return Response({'detail': 'Invalid data', 'errors': serializer.errors},
+                        status=status.HTTP_400_BAD_REQUEST)
+    
 
-	try:
-		validate_password(serializer.validated_data['password'])
-	except ValidationError as e:
-		return Response({'detail' : e.messages},
-				   		status=status.HTTP_400_BAD_REQUEST)
-	
+    try:
+        validate_password(serializer.validated_data['password'])
+    except ValidationError as e:
+        return Response({'detail' : e.messages},
+                        status=status.HTTP_400_BAD_REQUEST)
+    
 
-	# Creating user profile based on user data
-	if serializer.validated_data.get('is_artist', False):
-		user = serializer.save()
-		Artist.objects.create(user=user)
-	
-	else:
-		return Response({'detail' : "Can't register Applicant users for a while."},
-				  		status=status.HTTP_400_BAD_REQUEST)
-	
-	# Return more logical responses
-	return Response({'detail' : f'Registered successfuly as {user.id} id.'},
-				 	status=status.HTTP_200_OK)
+    # Creating user profile based on user data
+    if serializer.validated_data.get('is_artist', False):
+        user = serializer.save()
+        Artist.objects.create(user=user)
+    
+    else:
+        return Response({'detail' : "Can't register Applicant users for a while."},
+                        status=status.HTTP_400_BAD_REQUEST)
+    
+    # Return more logical responses
+    return Response({'detail' : f'Registered successfuly as {user.id} id.'},
+                    status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -73,47 +75,47 @@ def user_login(request: Request):
     user = authenticate(request, username=number, password=password)
 
     if user:
-	    access_token, refresh_token = get_tokens(number, password)
-	    
-	    return Response({'access_token': access_token, 'refresh_token': refresh_token},
-	                    status=status.HTTP_200_OK)
+        access_token, refresh_token = get_tokens(number, password)
+        
+        return Response({'access_token': access_token, 'refresh_token': refresh_token},
+                        status=status.HTTP_200_OK)
 
     return Response({'detail' : 'Authentication Failed'}, status=status.HTTP_401_UNAUTHORIZED)
 
   
 @api_view(['POST'])
 def new_token(request : Request):
-	refresh_token = request.data.get('refresh_token')
+    refresh_token = request.data.get('refresh_token')
 
-	if not refresh_token:
-		return Response({'detail' : 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    if not refresh_token:
+        return Response({'detail' : 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-	try:
-		refresh_token_obj = RefreshToken(refresh_token)
-	except Exception as e:
-		return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
+    try:
+        refresh_token_obj = RefreshToken(refresh_token)
+    except Exception as e:
+        return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-	user_id = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
+    user_id = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
 
-	# NOTE: I'm not sure this error handling in below lines is a good practice or no !n
-	try:
-		user = User.objects.get(id=user_id)
-	except User.DoesNotExist:
-		return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
+    # NOTE: I'm not sure this error handling in below lines is a good practice or no !n
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-	access_token = str(refresh_token_obj.access_token)
-	refresh_token = str(RefreshToken.for_user(user))
+    access_token = str(refresh_token_obj.access_token)
+    refresh_token = str(RefreshToken.for_user(user))
 
-	return Response({'access_token': access_token, 'refresh_token': refresh_token},
+    return Response({'access_token': access_token, 'refresh_token': refresh_token},
                     status=status.HTTP_200_OK)
-	
+    
 
 @api_view(['DELETE'])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_user(request : Request):
 
-	user = request.user
-	user.delete()
-	return Response({'detail' : 'User deleted successfully.'},
-				status=status.HTTP_204_NO_CONTENT)
+    user = request.user
+    user.delete()
+    return Response({'detail' : 'User deleted successfully.'},
+                status=status.HTTP_204_NO_CONTENT)

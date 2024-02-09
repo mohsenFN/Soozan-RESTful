@@ -1,6 +1,7 @@
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import BlacklistedToken
 from rest_framework.response import Response
+from rest_framework import status
 
 class BlacklistTokenMiddleware:
     def __init__(self, get_response):
@@ -15,7 +16,7 @@ class BlacklistTokenMiddleware:
 
             if BlacklistedToken.objects.filter(token=token).exists():
                 # Token is blacklisted, handle accordingly (e.g., return 401 Unauthorized)
-                return Response("Token is blacklisted")
+                return Response("Token is blacklisted", status=status.HTTP_OK_200)
 
         response = self.get_response(request)
         return response

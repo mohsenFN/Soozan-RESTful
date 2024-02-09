@@ -125,9 +125,8 @@ def delete_user(request : Request):
 @api_view(['POST'])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-def user_logout(request : Request):
-    breakpoint()
-    return Response({'detail' : 'XD'})    
-
-
+def user_logout(request : Request):    
+    user_token = request.headers['Authorization'].split()[1]
+    blacklist_token(user_token)
+    return Response({'detail' : 'Invalidated token and logged out successfully'}, status=status.HTTP_200_OK)
 

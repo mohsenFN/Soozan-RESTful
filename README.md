@@ -8,8 +8,8 @@
 - [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
 - [x] Use JWT instead of token-based-authentication
 - [*] Implement token black listing
-- [ ] Create an end-point for logging out
-- [ ] Add users token to black list after logging out
+- [x] Create an end-point for logging out
+- [x] Add users token to black list after logging out
 - [ ] Write tests
 - [ ] Use rate limit for views
 - [ ] Create a documentation for end-points

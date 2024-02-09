@@ -21,7 +21,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Local Imports
-from user.jwt_utils import get_tokens
+from user.jwt_utils import get_tokens, blacklist_token
 from user.models import User
 from user.serializers import UserSerializer
 from artist.models import Artist

@@ -119,3 +119,15 @@ def delete_user(request : Request):
     user.delete()
     return Response({'detail' : 'User deleted successfully.'},
                 status=status.HTTP_204_NO_CONTENT)
+
+
+
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def user_logout(request : Request):
+    breakpoint()
+    return Response({'detail' : 'XD'})    
+
+
+

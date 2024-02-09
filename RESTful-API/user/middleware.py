@@ -19,7 +19,7 @@ class BlacklistTokenMiddleware:
             if BlacklistedToken.objects.filter(token=token).exists():
                 # Token is blacklisted, handle accordingly (e.g., return 401 Unauthorized)
 
-                resp = Response("Token is blacklisted", status=status.HTTP_200_OK)
+                resp = Response({"detail" : "Token is blacklisted"}, status=status.HTTP_401_UNAUTHORIZED)
                 resp.accepted_renderer = JSONRenderer()
                 resp.accepted_media_type = 'application/json'
                 resp.renderer_context = {}

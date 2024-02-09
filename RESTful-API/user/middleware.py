@@ -16,7 +16,7 @@ class BlacklistTokenMiddleware:
 
             if BlacklistedToken.objects.filter(token=token).exists():
                 # Token is blacklisted, handle accordingly (e.g., return 401 Unauthorized)
-                return Response("Token is blacklisted", status=status.HTTP_OK_200)
+                return Response("Token is blacklisted", status=status.HTTP_200_OK)
 
         response = self.get_response(request)
         return response

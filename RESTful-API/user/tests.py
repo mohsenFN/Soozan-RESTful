@@ -43,8 +43,6 @@ class UserRegisterViewTest(TestCase):
 
 
     '''
-    Tests to add
-    proper requests
+    Tests to add ->
     check if derived models are being created
-    check duplicated phone numbers
     '''

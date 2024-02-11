@@ -26,6 +26,7 @@ from user.models import User
 from user.serializers import UserSerializer
 from artist.models import Artist
 from artist.serializers import ArtistDashBoardSerializer
+from applicant.models import Applicant
 
 
 @api_view(['POST'])
@@ -53,11 +54,13 @@ def user_register(request : Request):
     
 
     # Creating user profile based on user data
-    if serializer.validated_data.get('is_artist', False):
+    if serializer.validated_data.get('is_artist'):
         user = serializer.save()
         Artist.objects.create(user=user)
     
     else:
+        #user = serializer.save()
+        #Applicant.objects.create(user = user)
         return Response({'detail' : "Can't register Applicant users for a while."},
                         status=status.HTTP_400_BAD_REQUEST)
     

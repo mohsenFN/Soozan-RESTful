@@ -8,7 +8,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     number = models.CharField(max_length = 11, unique = True)
     password = models.CharField(max_length=88)
-    is_artist = models.BooleanField()
+    is_artist = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

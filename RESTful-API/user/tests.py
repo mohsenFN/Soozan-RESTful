@@ -11,7 +11,7 @@ class UserRegisterViewTest(TestCase):
 
     def test_empty_request(self):
         resp = self.client.post(self.url, {})
-        self.assertIn('No phone number is specified.', resp.data['detail'])
+        self.assertEqual(resp.data['detail'], 'No phone number is specified.')
 
     def test_request_with_only_password(self):
         resp = self.client.post(self.url, {'password' : '11228'})

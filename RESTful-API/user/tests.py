@@ -20,3 +20,8 @@ class UserRegisterViewTest(TestCase):
     def test_request_with_only_phonenumber(self):
         resp = self.client.post(self.url, {'number' : '09148387871'})
         self.assertIsInstance(resp.data['errors']['password'][0], ErrorDetail)
+
+    def test_request_with_short_password(self):
+        resp = self.client.post(self.url, {'number':'09148387871', 'password' : '11228'})
+        self.assertIn('This password is too short.', resp.data['detail'][0])
+

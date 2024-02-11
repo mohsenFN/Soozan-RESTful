@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 
-def UserRegisterViewTest(TestCase):
+class UserRegisterViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.url = reverse('user-register')

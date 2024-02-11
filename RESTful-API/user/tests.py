@@ -28,3 +28,10 @@ class UserRegisterViewTest(TestCase):
     def test_request_with_numeric_password(self):
         resp = self.client.post(self.url, {'number' : '09148387871', 'password' : '54586566'})
         self.assertEqual('This password is entirely numeric.', resp.data['detail'][0])
+
+    '''
+    Tests to add
+    proper requests
+    check if derived models are being created
+    check duplicated phone numbers
+    '''

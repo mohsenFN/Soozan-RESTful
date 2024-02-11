@@ -1,15 +1,8 @@
 # Soozan Restful App
 
 ## To-Do
-- [x] Cleaner error handling in User.views (Like Post.views)
-- [x] Explain dirs and files in you django project (End of README)
-- [x] Save post images with a specific name set --> Using UUID4
 - [ ] Custom error message for simplejwt user_not_found response (I can't find this kinda error message)
 - [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
-- [x] Use JWT instead of token-based-authentication
-- [*] Implement token black listing
-- [x] Create an end-point for logging out
-- [x] Add users token to black list after logging out
 - [ ] Write tests
 - [ ] Use rate limit for views
 - [ ] Create a documentation for end-points

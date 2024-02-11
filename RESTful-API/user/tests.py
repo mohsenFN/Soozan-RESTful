@@ -34,6 +34,14 @@ class UserRegisterViewTest(TestCase):
         resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
         self.assertEqual(200, resp.status_code)
 
+
+    def test_duplicate_number(self):
+        resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
+        resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
+        self.assertEqual(409, resp.status_code)
+
+
+
     '''
     Tests to add
     proper requests

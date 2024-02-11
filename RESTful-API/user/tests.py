@@ -29,6 +29,11 @@ class UserRegisterViewTest(TestCase):
         resp = self.client.post(self.url, {'number' : '09148387871', 'password' : '54586566'})
         self.assertEqual('This password is entirely numeric.', resp.data['detail'][0])
 
+
+    def test_proper_artist_request(self):
+        resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
+        self.assertEqual(200, resp.status_code)
+
     '''
     Tests to add
     proper requests

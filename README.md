@@ -3,6 +3,7 @@
 ## To-Do
 - [ ] Custom error message for simplejwt user_not_found response (I can't find this kinda error message)
 - [ ] More specified and accurate way for users location (check Documentation/docs.md for current method)
+- [ ] Use dynamic bussines texts in tests and views
 - [ ] Write tests
 - [ ] Use rate limit for views
 - [ ] Create a documentation for end-points

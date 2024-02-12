@@ -65,7 +65,8 @@ def user_register(request : Request):
                         status=status.HTTP_400_BAD_REQUEST)
     
     # Return more logical responses
-    return Response({'detail' : f'Registered successfuly as {user.id} id.'},
+    return Response({'detail' : f'Registered successfuly as {user.id} id.',
+                    'user_id' : user.id},
                     status=status.HTTP_200_OK)
 
 

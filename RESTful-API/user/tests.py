@@ -46,7 +46,7 @@ class UserRegisterViewTest(TestCase):
 
     def test_artist_derived_model_creation(self):
         resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
-        user = User.objects.get(id = 1)
+        user = User.objects.get(id = resp.data['user_id'])
         derived_model = Artist.objects.get(user=user)
         
         self.assertIsNotNone(derived_model)

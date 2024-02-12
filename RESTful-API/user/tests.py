@@ -4,6 +4,9 @@ from rest_framework.test import APIClient
 
 from rest_framework.exceptions import ErrorDetail
 
+from user.models import User
+from artist.models import Artist
+
 class UserRegisterViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -39,6 +42,15 @@ class UserRegisterViewTest(TestCase):
         resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
         resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
         self.assertEqual(409, resp.status_code)
+
+
+    def test_artist_derived_model_creation(self):
+        resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
+        user = User.objects.get(id = 1)
+        derived_model = Artist.objects.get(user=user)
+        
+        self.assertIsNotNone(derived_model)
+
 
 
 

@@ -50,11 +50,3 @@ class UserRegisterViewTest(TestCase):
         derived_model = Artist.objects.get(user=user)
         
         self.assertIsNotNone(derived_model)
-
-
-
-
-    '''
-    Tests to add ->
-    check if derived models are being created
-    '''

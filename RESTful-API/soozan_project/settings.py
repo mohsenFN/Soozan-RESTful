@@ -52,7 +52,8 @@ DRF_APPS = [
 LOCAL_APPS = [
     'user',
     'artist',
-    'post'
+    'post',
+    'applicant'
 ]
 
 INSTALLED_APPS = VENDOR_APPS + DRF_APPS + LOCAL_APPS

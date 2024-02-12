@@ -50,3 +50,20 @@ class UserRegisterViewTest(TestCase):
         derived_model = Artist.objects.get(user=user)
         
         self.assertIsNotNone(derived_model)
+
+
+class UserLoginViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.url = reverse('get-token')
+        self.register_url = reverse('user-register')
+    
+
+    def test_login_with_invalid_creds(self):
+        resp = self.client.post(self.url, {})
+        self.assertEqual(401, resp.status_code)
+
+    def test_login_with_valid_creds(self):
+        self.client.post(self.register_url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
+        resp = self.client.post(self.url, {'number' : '09148387871', 'password' : 'VeryG00dPassword'})
+        self.assertIn('access_token', resp.data)

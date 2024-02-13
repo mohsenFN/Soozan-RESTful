@@ -78,3 +78,9 @@ class RefreshTokenViewTest(TestCase):
     def test_empty_request(self):
         resp = self.client.post(self.url, {})
         self.assertEqual(MSG['REFRESH_TOKEN_REQ'], resp.json()['detail'])
+
+    def test_invalid_refresh_token(self):
+        resp = self.client.post(self.url, {'refresh_token' : 'KOSSSHER'})
+        self.assertEqual(MSG['INVALID_REFRESH_TOKEN'], resp.json()['detail'])
+
+        

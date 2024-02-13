@@ -27,7 +27,7 @@ from user.serializers import UserSerializer
 from artist.models import Artist
 from artist.serializers import ArtistDashBoardSerializer
 from applicant.models import Applicant
-
+from utils.user_respones import RESPONSE_MESSAGES as MSG
 
 @api_view(['POST'])
 def user_register(request : Request):
@@ -37,9 +37,9 @@ def user_register(request : Request):
 
     if not serializer.is_valid():
         if serializer.data.get("number") == None:
-            return Response({'detail' : 'No phone number is specified.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail' : MSG['NO_PHONE_NUMBER']}, status=status.HTTP_400_BAD_REQUEST)
         if User.objects.filter(number = serializer.data['number']):
-            return Response({'detail' : 'Phone numbers dedicated to an account already.'},
+            return Response({'detail' : MSG['DUPLICATE_NUMBER']},
                         status=status.HTTP_409_CONFLICT)
         
         return Response({'detail': 'Invalid data', 'errors': serializer.errors},
@@ -65,7 +65,7 @@ def user_register(request : Request):
                         status=status.HTTP_400_BAD_REQUEST)
     
     # Return more logical responses
-    return Response({'detail' : f'Registered successfuly as {user.id} id.',
+    return Response({'detail' : MSG['REGISTER_OK'],
                     'user_id' : user.id},
                     status=status.HTTP_200_OK)
 
@@ -84,7 +84,7 @@ def user_login(request: Request):
         return Response({'access_token': access_token, 'refresh_token': refresh_token},
                         status=status.HTTP_200_OK)
 
-    return Response({'detail' : 'Authentication Failed'}, status=status.HTTP_401_UNAUTHORIZED)
+    return Response({'detail' : MSG['AUTH_FAIL']}, status=status.HTTP_401_UNAUTHORIZED)
 
   
 @api_view(['POST'])
@@ -92,12 +92,12 @@ def new_token(request : Request):
     refresh_token = request.data.get('refresh_token')
 
     if not refresh_token:
-        return Response({'detail' : 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'detail' : MSG['REFRESH_TOKEN_REQ']}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         refresh_token_obj = RefreshToken(refresh_token)
     except Exception as e:
-        return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'detail' : MSG['INVALID_REFRESH_TOKEN']}, status=status.HTTP_401_UNAUTHORIZED)
 
     user_id = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
 
@@ -105,7 +105,7 @@ def new_token(request : Request):
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
-        return Response({'detail' : 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'detail' : MSG['INVALID_REFRESH_TOKEN']}, status=status.HTTP_401_UNAUTHORIZED)
 
     access_token = str(refresh_token_obj.access_token)
     refresh_token = str(RefreshToken.for_user(user))
@@ -121,7 +121,7 @@ def delete_user(request : Request):
 
     user = request.user
     user.delete()
-    return Response({'detail' : 'User deleted successfully.'},
+    return Response({'detail' : MSG['DELETE_USER_OK']},
                 status=status.HTTP_204_NO_CONTENT)
 
 
@@ -132,5 +132,5 @@ def delete_user(request : Request):
 def user_logout(request : Request):    
     user_token = request.headers['Authorization'].split()[1]
     blacklist_token(user_token)
-    return Response({'detail' : 'Invalidated token and logged out successfully'}, status=status.HTTP_200_OK)
+    return Response({'detail' : MSG['DELETE_USER_OK']}, status=status.HTTP_200_OK)
 

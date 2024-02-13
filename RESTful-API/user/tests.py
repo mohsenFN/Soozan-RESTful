@@ -7,6 +7,8 @@ from rest_framework.exceptions import ErrorDetail
 from user.models import User
 from artist.models import Artist
 
+from utils.user_respones import RESPONSE_MESSAGES as MSG
+
 class UserRegisterViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -14,11 +16,11 @@ class UserRegisterViewTest(TestCase):
 
     def test_empty_request(self):
         resp = self.client.post(self.url, {})
-        self.assertEqual(resp.data['detail'], 'No phone number is specified.')
+        self.assertEqual(resp.data['detail'], MSG['NO_PHONE_NUMBER'])
 
     def test_request_with_only_password(self):
         resp = self.client.post(self.url, {'password' : '11228'})
-        self.assertEqual(resp.data['detail'], 'No phone number is specified.')
+        self.assertEqual(resp.data['detail'], MSG['NO_PHONE_NUMBER'])
 
     def test_request_with_only_phonenumber(self):
         resp = self.client.post(self.url, {'number' : '09148387871'})

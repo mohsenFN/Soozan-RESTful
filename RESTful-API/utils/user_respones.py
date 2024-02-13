@@ -8,6 +8,6 @@ RESPONSE_MESSAGES = {
     'REFRESH_TOKEN_REQ' : 'Refresh token is required.',
     'AUTH_FAIL' : 'Authentication Failed',
     'REGISTER_OK' : 'Registered successfuly.',
-    'NO_PHONE_NUMBER' : 'Phone numbers dedicated to an account already.',
+    'NO_PHONE_NUMBER' : 'No phone number is specified.',
     'DUPLICATE_NUMBER' : 'Phone numbers dedicated to an account already.'
 }

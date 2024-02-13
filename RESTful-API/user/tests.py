@@ -74,6 +74,8 @@ class RefreshTokenViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.url = reverse('refresh-token')
+        self.register_url = reverse('user-register')
+        self.get_token_url = reverse('get-token')
 
     def test_empty_request(self):
         resp = self.client.post(self.url, {})
@@ -83,4 +85,13 @@ class RefreshTokenViewTest(TestCase):
         resp = self.client.post(self.url, {'refresh_token' : 'KOSSSHER'})
         self.assertEqual(MSG['INVALID_REFRESH_TOKEN'], resp.json()['detail'])
 
-        
+    def test_valid_refresh_token(self):
+        self.client.post(self.register_url, {'number' : '09148387871', 'password' : 'VeryG00dPassw0rd', 'is_artist' : True})
+
+        resp = self.client.post(self.get_token_url, {'number' : '09148387871', 'password' : 'VeryG00dPassw0rd'})
+        refresh_token = resp.json()['refresh_token']
+
+        resp = self.client.post(self.url, {'refresh_token' : refresh_token})
+        self.assertIn('access_token', resp.data)
+
+

@@ -70,8 +70,11 @@ class UserLoginViewTest(TestCase):
         self.assertIn('access_token', resp.data)
 
 # AKA refresh-token
-class NewTokenViewTest(TestCase):
+class RefreshTokenViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.url = reverse('refresh-token')
 
+    def test_empty_request(self):
+        resp = self.client.post(self.url, {})
+        self.assertEqual(MSG['REFRESH_TOKEN_REQ'], resp.json()['detail'])

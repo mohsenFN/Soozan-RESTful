@@ -118,3 +118,23 @@ class DeleteUserViewTest(TestCase):
         invalid_access_token = 'Kossherrrrrr'
         resp = self.client.delete(self.url, HTTP_AUTHORIZATION=f'Bearer {invalid_access_token}')
         self.assertEqual(401, resp.status_code)
+
+
+class UserLogOutViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.register_url = reverse('user-register')
+        self.get_token_url = reverse('get-token')
+        self.logout_url = reverse('user-logout')
+
+    def test_user_logout(self):
+        # register a user
+        self.client.post(self.register_url, {'number' : '09148387871', 'password' : 'VeryG00dPassw0rd', 'is_artist' : True})
+        # get user access token
+        resp = self.client.post(self.get_token_url, {'number' : '09148387871', 'password' : 'VeryG00dPassw0rd'})
+        access_token = resp.json()['access_token']
+
+        self.client.post(self.logout_url, HTTP_AUTHORIZATION=f'Bearer {access_token}')
+        # trying to delete the same user with the same token we should get an 401 error
+        resp = self.client.post(self.logout_url, HTTP_AUTHORIZATION=f'Bearer {access_token}')
+        self.assertEqual(401, resp.status_code)

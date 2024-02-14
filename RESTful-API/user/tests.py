@@ -113,3 +113,8 @@ class DeleteUserViewTest(TestCase):
         resp = self.client.delete(self.url, HTTP_AUTHORIZATION=f'Bearer {access_token}')
 
         self.assertEqual(204, resp.status_code)
+    
+    def test_invalid_user_deletion(self):
+        invalid_access_token = 'Kossherrrrrr'
+        resp = self.client.delete(self.url, HTTP_AUTHORIZATION=f'Bearer {invalid_access_token}')
+        self.assertEqual(401, resp.status_code)

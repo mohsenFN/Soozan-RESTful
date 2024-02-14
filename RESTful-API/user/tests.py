@@ -95,3 +95,21 @@ class RefreshTokenViewTest(TestCase):
         self.assertIn('access_token', resp.data)
 
 
+
+class DeleteUserViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.register_url = reverse('user-register')
+        self.get_token_url = reverse('get-token')
+        self.url = reverse('user-delete')
+
+    def test_correct_user_deletion(self):
+        # register a user
+        self.client.post(self.register_url, {'number' : '09148387871', 'password' : 'VeryG00dPassw0rd', 'is_artist' : True})
+        # get user access token
+        resp = self.client.post(self.get_token_url, {'number' : '09148387871', 'password' : 'VeryG00dPassw0rd'})
+        access_token = resp.json()['access_token']
+
+        resp = self.client.delete(self.url, HTTP_AUTHORIZATION=f'Bearer {access_token}')
+
+        self.assertEqual(204, resp.status_code)

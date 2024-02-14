@@ -2,8 +2,10 @@
 
 ## To-Do
 - [ ] More specified and accurate way for users location 
-- [ ] Use dynamic bussines texts in tests and views
-- [ ] Write tests
+- [ ] Use dynamic bussines texts post app
+- [ ] Use dynamic bussines texts artist app
+- [ ] Write tests for post app
+- [ ] Write test for artist app  
 - [ ] Use rate limit for views
 - [ ] Create a documentation for end-points
 - [ ] Celebrate the success! 🎉

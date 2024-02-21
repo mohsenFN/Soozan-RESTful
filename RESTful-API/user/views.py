@@ -19,6 +19,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.exceptions import TokenError
 
 # Local Imports
 from user.jwt_utils import get_tokens, blacklist_token
@@ -96,7 +97,7 @@ def new_token(request : Request):
 
     try:
         refresh_token_obj = RefreshToken(refresh_token)
-    except Exception as e:
+    except TokenError:
         return Response({'detail' : MSG['INVALID_REFRESH_TOKEN']}, status=status.HTTP_401_UNAUTHORIZED)
 
     user_id = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user

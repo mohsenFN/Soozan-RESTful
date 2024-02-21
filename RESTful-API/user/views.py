@@ -72,7 +72,7 @@ def user_register(request : Request):
 
 
 @api_view(['POST'])
-def user_login(request: Request):
+def get_token(request: Request):
     number = request.data.get('number')
     password = request.data.get('password')
 
@@ -89,7 +89,7 @@ def user_login(request: Request):
 
   
 @api_view(['POST'])
-def new_token(request : Request):
+def refresh_token(request : Request):
     refresh_token = request.data.get('refresh_token')
 
     if not refresh_token:

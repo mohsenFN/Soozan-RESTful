@@ -101,8 +101,7 @@ def new_token(request : Request):
         return Response({'detail' : MSG['INVALID_REFRESH_TOKEN']}, status=status.HTTP_401_UNAUTHORIZED)
 
     user_id = refresh_token_obj.payload.get('user_id') # Used to get new refresh token based on user
-
-    # NOTE: I'm not sure this error handling in below lines is a good practice or no !n
+    
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:

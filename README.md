@@ -47,6 +47,11 @@ Follow these steps to set up and run the Soozan Restful app:
    python manage.py runserver
    ```
 
+4. **For whole usage of API your need to do the migrations:**
+   ```bash
+   python manage.py migrate
+   ```
+
 ---
 
 ## How to generate database diagram

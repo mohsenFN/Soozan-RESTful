@@ -11,3 +11,13 @@ class PostTagsViewTest(TestCase):
     def test_get_tags(self):
         resp = self.client.get(self.url, {'x' : 'z'})
         self.assertGreater(len(resp.json()), 0)
+
+
+class NewPostViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.url = reverse('post-new')
+
+    def test_unauth_request(self):
+        resp = self.client.post(self.url, {})
+        self.assertEqual(401, resp.status_code)

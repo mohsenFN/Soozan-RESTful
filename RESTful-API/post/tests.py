@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APIClient
 
+from utils.tests import register_and_get_token
 
 class PostTagsViewTest(TestCase):
     def setUp(self):

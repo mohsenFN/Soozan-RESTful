@@ -60,3 +60,13 @@ class UpdatePostViewTest(TestCase):
         self.client.post(self.new_post_url, {'caption' : 'test', 'tags' : 2, 'image' : image})
         resp = self.client.patch(self.url, {'caption' : 'Updated caption'})
         self.assertEqual(200, resp.status_code)
+
+    def test_valid_update(self):
+        token = register_and_get_token(self.client, self.register_url, self.login_url)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        
+        image = test_image()
+        # Upload a post :
+        self.client.post(self.new_post_url, {'caption' : 'test', 'tags' : 2, 'image' : image})
+        resp = self.client.patch(self.url, {'invalid_arg' : 0})
+        self.assertEqual(400, resp.status_code)

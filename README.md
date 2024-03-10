@@ -7,8 +7,11 @@
 - [ ] Write tests for post app
 - [ ] Write test for artist app  
 - [ ] Use rate limit for views
+- [ ] Use django-axes
+- [ ] Consider storing the key-value in environment variables or secrets managers
 - [ ] Create a documentation for end-points
 - [ ] Celebrate the success! 🎉
+- [ ] https://cheatsheetseries.owasp.org/cheatsheets/Django_Security_Cheat_Sheet.html
 
 
 ## Overview

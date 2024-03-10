@@ -40,3 +40,23 @@ class NewPostViewTest(TestCase):
 
         resp = self.client.post(self.url, {'caption' : 'test', 'tags' : 1, 'image' : image})
         self.assertEqual(201, resp.status_code)
+
+
+class UpdatePostViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.register_url = reverse('user-register')
+        self.login_url = reverse('get-token')
+        self.new_post_url = reverse('post-new')
+        self.url = reverse('post-update', args=[1])
+
+    
+    def test_valid_update(self):
+        token = register_and_get_token(self.client, self.register_url, self.login_url)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        
+        image = test_image()
+        # Upload a post :
+        self.client.post(self.new_post_url, {'caption' : 'test', 'tags' : 2, 'image' : image})
+        resp = self.client.patch(self.url, {'caption' : 'Updated caption'})
+        self.assertEqual(200, resp.status_code)

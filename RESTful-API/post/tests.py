@@ -10,7 +10,7 @@ class PostTagsViewTest(TestCase):
         self.url = reverse('get-tags')
 
     def test_get_tags(self):
-        resp = self.client.get(self.url, {'x' : 'z'})
+        resp = self.client.get(self.url, {})
         self.assertGreater(len(resp.json()), 0)
 
 

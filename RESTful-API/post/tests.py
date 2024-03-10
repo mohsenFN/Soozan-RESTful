@@ -1,9 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APIClient
 
-from utils.tests import register_and_get_token
+from utils.tests import register_and_get_token, test_image
 
 class PostTagsViewTest(TestCase):
     def setUp(self):
@@ -36,11 +35,8 @@ class NewPostViewTest(TestCase):
     def test_correct_request(self):
         token = register_and_get_token(self.client, self.register_url, self.login_url)
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
-
-        with open('../11228.jpg', 'rb') as f:
-            bimage = f.read()
         
-        image = SimpleUploadedFile("test_image.jpg", bimage, content_type="image/jpeg")
+        image = test_image()
 
         resp = self.client.post(self.url, {'caption' : 'test', 'tags' : 1, 'image' : image})
         self.assertEqual(201, resp.status_code)

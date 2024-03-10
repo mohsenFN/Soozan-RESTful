@@ -1,3 +1,13 @@
 from django.test import TestCase
+from django.urls import reverse
 
-# Create your tests here.
+from rest_framework.test import APIClient
+
+class PostTagsViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.url = reverse('get-tags')
+
+    def test_get_tags(self):
+        resp = self.client.get(self.url, {'x' : 'z'})
+        self.assertGreater(len(resp.json()), 0)

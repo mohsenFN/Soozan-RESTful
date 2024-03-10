@@ -31,7 +31,7 @@ def new_post(request):
 
     if serializer.is_valid():
         post = serializer.save()
-        return Response({'detail': 'New post saved', 'post_id': post.id}, status=status.HTTP_201_CREATED)
+        return Response({'detail': POST_RESPONSES['CREATED'], 'post_id': post.id}, status=status.HTTP_201_CREATED)
 
     return Response({'detail': 'Invalid data', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -43,14 +43,14 @@ def update_post(request, post_id):
     try:
         post = Post.objects.get(pk=post_id, artist=request.user)
     except Post.DoesNotExist:
-        return Response({'detail': 'Post not found or you do not have permission to update this post'},
+        return Response({'detail': POST_RESPONSES['CANT_UPDATE']},
                         status=status.HTTP_404_NOT_FOUND)
 
     serializer = UploadPostSerializer(post, data=request.data, partial=True, context={'request': request})
 
     if serializer.is_valid():
         serializer.save()
-        return Response({'detail': 'Post updated successfully'}, status=status.HTTP_200_OK)
+        return Response({'detail': POST_RESPONSES['UPDATED']}, status=status.HTTP_200_OK)
 
     return Response({'detail': 'Invalid data', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -62,9 +62,9 @@ def delete_post(request, post_id):
     try:
         post = Post.objects.get(pk=post_id, artist=request.user)
     except Post.DoesNotExist:
-        return Response({'detail': 'Post not found or you do not have permission to delete this post'},
+        return Response({'detail': POST_RESPONSES['CANT_DELETE']},
                         status=status.HTTP_404_NOT_FOUND)
 
     post.delete()
 
-    return Response({'detail': 'Post deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    return Response({'detail': POST_RESPONSES['DELETED']}, status=status.HTTP_204_NO_CONTENT)

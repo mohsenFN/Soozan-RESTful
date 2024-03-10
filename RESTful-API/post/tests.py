@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 from rest_framework.test import APIClient
 
@@ -33,3 +34,19 @@ class NewPostViewTest(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
         resp = self.client.post(self.url, {})
         self.assertEqual(400, resp.status_code)
+    
+    def test_correct_request(self):
+        # Register a test user and get access token for posting new post
+        self.client.post(self.register_url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
+        resp = self.client.post(self.login_url, {'number' : '09148387871', 'password' : 'VeryG00dPassword'})
+        token = resp.data['access_token']
+
+        
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        with open('../11228.jpg', 'rb') as f:
+            bimage = f.read()
+        
+        image = SimpleUploadedFile("test_image.jpg", bimage, content_type="image/jpeg")
+
+        resp = self.client.post(self.url, {'caption' : 'test', 'tags' : 1, 'image' : image})
+        self.assertEqual(201, resp.status_code)

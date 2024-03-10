@@ -11,3 +11,12 @@ USER_RESPONSES = {
     'NO_PHONE_NUMBER' : 'No phone number is specified.',
     'DUPLICATE_NUMBER' : 'Phone numbers dedicated to an account already.'
 }
+
+
+POST_RESPONSES = {
+    'CREATED' : 'Post created successfully.',
+    'UPDATED' : 'Post updated successfully.',
+    'DELETED' : 'Post deleted successfully.',
+    'CANT_DELETE' : 'Post not found or you do not have permission to delete this post',
+    'CANT_UPDATE' : 'Post not found or you do not have permission to update this post',
+}

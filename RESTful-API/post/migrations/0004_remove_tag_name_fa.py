@@ -3,6 +3,25 @@
 from django.db import migrations
 
 
+def add_initial_tags(apps, schema_editor):
+    Tag = apps.get_model('post', 'Tag')
+    Tag.objects.create(name_en='Minimal', name_fa='مینیمال')
+    Tag.objects.create(name_en='Realistic', name_fa='واقعی‌گرا')
+    Tag.objects.create(name_en='Gray Wash', name_fa='خاکستری')
+    Tag.objects.create(name_en='Watercolor', name_fa='آبرنگ')
+    Tag.objects.create(name_en='Dotwork', name_fa='نقطه‌کاری')
+    Tag.objects.create(name_en='Geometric', name_fa='هندسی')
+    Tag.objects.create(name_en='Japanese', name_fa='ژاپنی')
+    Tag.objects.create(name_en='Traditional', name_fa='سنتی')
+    Tag.objects.create(name_en='Abstract', name_fa='انتزاعی')
+    Tag.objects.create(name_en='Black and Grey', name_fa='سیاه و خاکستری')
+    Tag.objects.create(name_en='Celtic', name_fa='کلتیک')
+    Tag.objects.create(name_en='Tribal', name_fa='تریبال')
+    Tag.objects.create(name_en='Portrait', name_fa='پرتره')
+    Tag.objects.create(name_en='New School', name_fa='نیو اسکول')
+    Tag.objects.create(name_en='Old School', name_fa='اولد اسکول')
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -10,8 +29,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='tag',
-            name='name_fa',
-        ),
+        migrations.RunPython(add_initial_tags),
     ]

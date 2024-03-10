@@ -28,7 +28,7 @@ from user.serializers import UserSerializer
 from artist.models import Artist
 from artist.serializers import ArtistDashBoardSerializer
 from applicant.models import Applicant
-from utils.user_respones import RESPONSE_MESSAGES as MSG
+from utils.user_respones import USER_RESPONSES as MSG
 
 @api_view(['POST'])
 def user_register(request : Request):

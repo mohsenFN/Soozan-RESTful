@@ -21,28 +21,32 @@ class NewPostViewTest(TestCase):
         self.login_url = reverse('get-token')
         self.url = reverse('post-new')
 
+    def register_and_get_token(self):
+        number = '09148387871'
+        password = 'VeryG00dPassword'
+
+        self.client.post(self.register_url, {'number': number,
+                                            'password': password,
+                                            'is_artist': True})
+        # Get access token
+        resp = self.client.post(self.login_url, {'number': number, 'password': password})
+        return resp.data['access_token']
+
     def test_unauth_request(self):
         resp = self.client.post(self.url, {})
         self.assertEqual(401, resp.status_code)
      
     def test_authed_empty_request(self):
-        # Register a test user and get access token for posting new post
-        self.client.post(self.register_url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
-        resp = self.client.post(self.login_url, {'number' : '09148387871', 'password' : 'VeryG00dPassword'})
-        token = resp.data['access_token']
-        
+        token = self.register_and_get_token()
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        
         resp = self.client.post(self.url, {})
         self.assertEqual(400, resp.status_code)
     
     def test_correct_request(self):
-        # Register a test user and get access token for posting new post
-        self.client.post(self.register_url, {'number' : '09148387871', 'password' : 'VeryG00dPassword', 'is_artist' : True})
-        resp = self.client.post(self.login_url, {'number' : '09148387871', 'password' : 'VeryG00dPassword'})
-        token = resp.data['access_token']
-
-        
+        token = self.register_and_get_token()
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+
         with open('../11228.jpg', 'rb') as f:
             bimage = f.read()
         

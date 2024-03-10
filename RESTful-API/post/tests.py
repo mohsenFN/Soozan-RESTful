@@ -27,14 +27,14 @@ class NewPostViewTest(TestCase):
         self.assertEqual(401, resp.status_code)
      
     def test_authed_empty_request(self):
-        token = self.register_and_get_token()
+        token = register_and_get_token(self.client, self.register_url, self.login_url)
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
         
         resp = self.client.post(self.url, {})
         self.assertEqual(400, resp.status_code)
     
     def test_correct_request(self):
-        token = self.register_and_get_token()
+        token = register_and_get_token(self.client, self.register_url, self.login_url)
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
 
         with open('../11228.jpg', 'rb') as f:

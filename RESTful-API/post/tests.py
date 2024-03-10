@@ -21,17 +21,6 @@ class NewPostViewTest(TestCase):
         self.login_url = reverse('get-token')
         self.url = reverse('post-new')
 
-    def register_and_get_token(self):
-        number = '09148387871'
-        password = 'VeryG00dPassword'
-
-        self.client.post(self.register_url, {'number': number,
-                                            'password': password,
-                                            'is_artist': True})
-        # Get access token
-        resp = self.client.post(self.login_url, {'number': number, 'password': password})
-        return resp.data['access_token']
-
     def test_unauth_request(self):
         resp = self.client.post(self.url, {})
         self.assertEqual(401, resp.status_code)

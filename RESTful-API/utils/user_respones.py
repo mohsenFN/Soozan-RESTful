@@ -1,7 +1,7 @@
 
 # RESPONES HERE WILL BE USED IN USER APP
 
-RESPONSE_MESSAGES = {
+USER_RESPONSES = {
     'LOGOUT_OK' : 'Invalidated token and logged out successfully',
     'DELETE_USER_OK' : 'User deleted successfully.',
     'INVALID_REFRESH_TOKEN' : 'Invalid refresh token.',

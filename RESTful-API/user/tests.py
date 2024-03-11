@@ -7,7 +7,7 @@ from rest_framework.exceptions import ErrorDetail
 from user.models import User
 from artist.models import Artist
 
-from utils.user_respones import RESPONSE_MESSAGES as MSG
+from utils.user_respones import USER_RESPONSES as MSG
 from utils.tests import register_and_get_token
 
 class UserRegisterViewTest(TestCase):

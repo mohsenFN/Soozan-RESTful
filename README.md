@@ -72,6 +72,12 @@ Follow these steps to set up and run the Soozan Restful app:
 
 ---
 
+## Example of .env file
+   ```bash
+   SECRET_KEY=mysecretkey
+   VERIFYING_KEY=verifykey
+   ```
+
 ## Directories explained 
 
 This repository contains the source code for the Soozan RESTful API project. The project is organized into the following directories and apps:

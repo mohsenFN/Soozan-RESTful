@@ -165,7 +165,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None, # In production, you may want to use a separate key for verification.
+    'VERIFYING_KEY': os.environ.get('VERIFYING_KEY'), # In production, you may want to use a separate key for verification.
     'AUTH_HEADER_TYPES': ('Bearer',),
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',

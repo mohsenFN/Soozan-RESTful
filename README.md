@@ -2,9 +2,9 @@
 
 ## To-Do
 - [ ] More specified and accurate way for users location 
-- [ ] Use dynamic bussines texts post app
+- [x] Use dynamic bussines texts post app
 - [ ] Use dynamic bussines texts artist app
-- [ ] Write tests for post update & post delete
+- [ ] Write tests for post delete
 - [ ] Write test for artist app  
 - [ ] https://cheatsheetseries.owasp.org/cheatsheets/Django_Security_Cheat_Sheet.html
 - [ ] Use rate limit for views

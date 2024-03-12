@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
 
-from utils.tests import register_and_get_token, test_image
+from utils.tests import register_and_get_token, test_image, upload_test_post
 
 class PostTagsViewTest(TestCase):
     def setUp(self):
@@ -35,10 +35,8 @@ class NewPostViewTest(TestCase):
     def test_correct_request(self):
         token = register_and_get_token(self.client, self.register_url, self.login_url)
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
-        
-        image = test_image()
 
-        resp = self.client.post(self.url, {'caption' : 'test', 'tags' : 1, 'image' : image})
+        resp = upload_test_post(self.client, self.url)
         self.assertEqual(201, resp.status_code)
 
 

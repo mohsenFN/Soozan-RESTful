@@ -20,4 +20,4 @@ def test_image():
 
 def upload_test_post(client, url):
     image = test_image()
-    client.post(url, {'caption' : 'test', 'tags' : 1, 'image' : image})
+    return client.post(url, {'caption' : 'test', 'tags' : 1, 'image' : image})

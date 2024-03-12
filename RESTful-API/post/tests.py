@@ -57,7 +57,7 @@ class UpdatePostViewTest(TestCase):
         resp = self.client.patch(self.url, {'caption' : 'Updated caption'})
         self.assertEqual(200, resp.status_code)
 
-    def test_valid_update(self):
+    def test_invalid_update(self):
         token = register_and_get_token(self.client, self.register_url, self.login_url)
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
         

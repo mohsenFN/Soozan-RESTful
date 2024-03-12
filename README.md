@@ -3,7 +3,7 @@
 ## To-Do
 - [ ] More specified and accurate way for users location 
 - [x] Use dynamic bussines texts post app
-- [ ] Use dynamic bussines texts artist app
+- [x] Use dynamic bussines texts artist app
 - [x] Write tests for post delete
 - [ ] Write test for artist app 
 - [ ] Fix this : FAIL: test_valid_update (post.tests.UpdatePostViewTest.test_valid_update)

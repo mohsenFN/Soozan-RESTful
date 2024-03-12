@@ -2,15 +2,11 @@
 
 ## To-Do
 - [ ] More specified and accurate way for users location 
-- [x] Use dynamic bussines texts post app
-- [x] Use dynamic bussines texts artist app
-- [x] Write tests for post delete
 - [ ] Write test for artist app 
 - [ ] Fix this : FAIL: test_valid_update (post.tests.UpdatePostViewTest.test_valid_update)
 - [ ] https://cheatsheetseries.owasp.org/cheatsheets/Django_Security_Cheat_Sheet.html
 - [ ] Use rate limit for views
 - [ ] Use django-axes for monitoring login attemps
-- [ ] Consider storing the key-value in environment variables or secrets managers
 - [ ] Create a documentation for end-points
 - [ ] Celebrate the success! 🎉
 

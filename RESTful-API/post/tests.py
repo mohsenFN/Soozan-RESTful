@@ -74,3 +74,11 @@ class DeletePostViewTest(TestCase):
         self.new_post_url = reverse('post-new')
         self.url = reverse('post-delete', args=[1])
     
+    def test_valid_post_delete(self):
+        # register and upload a post
+        token = register_and_get_token(self.client, self.register_url, self.login_url)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        upload_test_post(self.client, self.new_post_url)
+
+        resp = self.client.delete(self.url)
+        self.assertEqual(204, resp.status_code)

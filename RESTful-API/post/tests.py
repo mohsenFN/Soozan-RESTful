@@ -64,3 +64,13 @@ class UpdatePostViewTest(TestCase):
         upload_test_post(self.client, self.new_post_url)
         resp = self.client.patch(self.url, {'invalid_arg' : 0})
         self.assertEqual(400, resp.status_code)
+
+
+class DeletePostViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.register_url = reverse('user-register')
+        self.login_url = reverse('get-token')
+        self.new_post_url = reverse('post-new')
+        self.url = reverse('post-delete', args=[1])
+    

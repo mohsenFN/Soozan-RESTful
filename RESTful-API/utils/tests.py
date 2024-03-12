@@ -17,3 +17,7 @@ def test_image():
     with open(test_image_adr, 'rb') as f:
             bimage = f.read()
     return SimpleUploadedFile("test_image.jpg", bimage, content_type="image/jpeg")
+
+def upload_test_post(client, url):
+    image = test_image()
+    client.post(url, {'caption' : 'test', 'tags' : 1, 'image' : image})
